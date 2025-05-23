@@ -2,7 +2,7 @@ hostname: s2-leaf3
 is_deployed: true
 router_bgp:
   as: '65202'
-  router_id: 192.2.255.7
+  router_id: 192.2.255.55
   distance:
     external_routes: 20
     internal_routes: 200
@@ -45,16 +45,16 @@ router_bgp:
     - name: EVPN-OVERLAY-PEERS
       activate: false
   neighbors:
-  - ip_address: 10.222.251.9
+  - ip_address: 10.222.251.105
     peer_group: MLAG-IPv4-UNDERLAY-PEER
     peer: s2-leaf4
     description: s2-leaf4
-  - ip_address: 172.32.255.16
+  - ip_address: 172.32.255.208
     peer_group: IPv4-UNDERLAY-PEERS
     remote_as: '65002'
     peer: s2-spine1
     description: s2-spine1_Ethernet4
-  - ip_address: 172.32.255.18
+  - ip_address: 172.32.255.210
     peer_group: IPv4-UNDERLAY-PEERS
     remote_as: '65002'
     peer: s2-spine2
@@ -78,8 +78,8 @@ router_bgp:
       activate: true
   vrfs:
   - name: bluevrf
-    router_id: 192.2.255.7
-    rd: 192.2.255.7:10
+    router_id: 192.2.255.55
+    rd: 192.2.255.55:10
     route_targets:
       import:
       - address_family: evpn
@@ -92,12 +92,12 @@ router_bgp:
     redistribute_routes:
     - source_protocol: connected
     neighbors:
-    - ip_address: 10.222.251.9
+    - ip_address: 10.222.251.105
       peer_group: MLAG-IPv4-UNDERLAY-PEER
   vlans:
   - id: 110
     tenant: Tenant_A
-    rd: 192.2.255.7:20110
+    rd: 192.2.255.55:20110
     route_targets:
       both:
       - 20110:20110
@@ -105,7 +105,7 @@ router_bgp:
     - learned
   - id: 360
     tenant: Tenant_A
-    rd: 192.2.255.7:55360
+    rd: 192.2.255.55:55360
     route_targets:
       both:
       - 55360:55360
@@ -113,7 +113,7 @@ router_bgp:
     - learned
   - id: 160
     tenant: Tenant_A
-    rd: 192.2.255.7:55160
+    rd: 192.2.255.55:55160
     route_targets:
       both:
       - 55160:55160
@@ -191,13 +191,13 @@ vlan_interfaces:
   description: MLAG_PEER_L3_PEERING
   shutdown: false
   mtu: 1500
-  ip_address: 10.222.251.8/31
+  ip_address: 10.222.251.104/31
 - name: Vlan4094
   description: MLAG_PEER
   shutdown: false
   no_autostate: true
   mtu: 1500
-  ip_address: 10.222.252.8/31
+  ip_address: 10.222.252.104/31
 - name: Vlan110
   tenant: Tenant_A
   tags:
@@ -213,7 +213,7 @@ vlan_interfaces:
   description: 'MLAG_PEER_L3_iBGP: vrf bluevrf'
   vrf: bluevrf
   mtu: 1500
-  ip_address: 10.222.251.8/31
+  ip_address: 10.222.251.104/31
 port_channel_interfaces:
 - name: Port-Channel1
   description: MLAG_PEER_s2-leaf4_Po1
@@ -252,7 +252,7 @@ ethernet_interfaces:
   shutdown: false
   mtu: 1500
   type: routed
-  ip_address: 172.32.255.17/31
+  ip_address: 172.32.255.209/31
 - name: Ethernet3
   peer: s2-spine2
   peer_interface: Ethernet4
@@ -261,11 +261,11 @@ ethernet_interfaces:
   shutdown: false
   mtu: 1500
   type: routed
-  ip_address: 172.32.255.19/31
+  ip_address: 172.32.255.211/31
 mlag_configuration:
   domain_id: pod22
   local_interface: Vlan4094
-  peer_address: 10.222.252.9
+  peer_address: 10.222.252.105
   peer_link: Port-Channel1
   reload_delay_mlag: '300'
   reload_delay_non_mlag: '330'
@@ -287,16 +287,16 @@ loopback_interfaces:
 - name: Loopback0
   description: EVPN_Overlay_Peering
   shutdown: false
-  ip_address: 192.2.255.7/32
+  ip_address: 192.2.255.55/32
 - name: Loopback1
   description: VTEP_VXLAN_Tunnel_Source
   shutdown: false
-  ip_address: 192.2.254.7/32
+  ip_address: 192.2.254.55/32
 - name: Loopback100
   description: bluevrf_VTEP_DIAGNOSTICS
   shutdown: false
   vrf: bluevrf
-  ip_address: 10.255.1.7/32
+  ip_address: 10.255.1.55/32
 prefix_lists:
 - name: PL-LOOPBACKS-EVPN-OVERLAY
   sequence_numbers:
@@ -331,6 +331,6 @@ vxlan_interface:
         vni: 10
 virtual_source_nat_vrfs:
 - name: bluevrf
-  ip_address: 10.255.1.7
+  ip_address: 10.255.1.55
 metadata:
   platform: cEOS

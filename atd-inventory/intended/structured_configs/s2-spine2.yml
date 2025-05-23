@@ -39,62 +39,62 @@ router_bgp:
   - source_protocol: connected
     route_map: RM-CONN-2-BGP
   neighbors:
-  - ip_address: 172.32.255.11
+  - ip_address: 172.32.255.203
     peer_group: IPv4-UNDERLAY-PEERS
     remote_as: '65201'
     peer: s2-leaf1
     description: s2-leaf1_Ethernet3
-  - ip_address: 172.32.255.15
+  - ip_address: 172.32.255.207
     peer_group: IPv4-UNDERLAY-PEERS
     remote_as: '65201'
     peer: s2-leaf2
     description: s2-leaf2_Ethernet3
-  - ip_address: 172.32.255.19
+  - ip_address: 172.32.255.211
     peer_group: IPv4-UNDERLAY-PEERS
     remote_as: '65202'
     peer: s2-leaf3
     description: s2-leaf3_Ethernet3
-  - ip_address: 172.32.255.23
+  - ip_address: 172.32.255.215
     peer_group: IPv4-UNDERLAY-PEERS
     remote_as: '65202'
     peer: s2-leaf4
     description: s2-leaf4_Ethernet3
-  - ip_address: 172.32.255.27
+  - ip_address: 172.32.255.219
     peer_group: IPv4-UNDERLAY-PEERS
     remote_as: '65203'
     peer: s2-brdr1
     description: s2-brdr1_Ethernet3
-  - ip_address: 172.32.255.31
+  - ip_address: 172.32.255.223
     peer_group: IPv4-UNDERLAY-PEERS
     remote_as: '65203'
     peer: s2-brdr2
     description: s2-brdr2_Ethernet3
-  - ip_address: 192.2.255.9
+  - ip_address: 192.2.255.57
     peer_group: EVPN-OVERLAY-PEERS
     peer: s2-brdr1
     description: s2-brdr1
     remote_as: '65203'
-  - ip_address: 192.2.255.10
+  - ip_address: 192.2.255.58
     peer_group: EVPN-OVERLAY-PEERS
     peer: s2-brdr2
     description: s2-brdr2
     remote_as: '65203'
-  - ip_address: 192.2.255.5
+  - ip_address: 192.2.255.53
     peer_group: EVPN-OVERLAY-PEERS
     peer: s2-leaf1
     description: s2-leaf1
     remote_as: '65201'
-  - ip_address: 192.2.255.6
+  - ip_address: 192.2.255.54
     peer_group: EVPN-OVERLAY-PEERS
     peer: s2-leaf2
     description: s2-leaf2
     remote_as: '65201'
-  - ip_address: 192.2.255.7
+  - ip_address: 192.2.255.55
     peer_group: EVPN-OVERLAY-PEERS
     peer: s2-leaf3
     description: s2-leaf3
     remote_as: '65202'
-  - ip_address: 192.2.255.8
+  - ip_address: 192.2.255.56
     peer_group: EVPN-OVERLAY-PEERS
     peer: s2-leaf4
     description: s2-leaf4
@@ -147,7 +147,7 @@ ethernet_interfaces:
   shutdown: false
   mtu: 1500
   type: routed
-  ip_address: 172.32.255.10/31
+  ip_address: 172.32.255.202/31
 - name: Ethernet3
   peer: s2-leaf2
   peer_interface: Ethernet3
@@ -156,7 +156,7 @@ ethernet_interfaces:
   shutdown: false
   mtu: 1500
   type: routed
-  ip_address: 172.32.255.14/31
+  ip_address: 172.32.255.206/31
 - name: Ethernet4
   peer: s2-leaf3
   peer_interface: Ethernet3
@@ -165,7 +165,7 @@ ethernet_interfaces:
   shutdown: false
   mtu: 1500
   type: routed
-  ip_address: 172.32.255.18/31
+  ip_address: 172.32.255.210/31
 - name: Ethernet5
   peer: s2-leaf4
   peer_interface: Ethernet3
@@ -174,7 +174,7 @@ ethernet_interfaces:
   shutdown: false
   mtu: 1500
   type: routed
-  ip_address: 172.32.255.22/31
+  ip_address: 172.32.255.214/31
 - name: Ethernet7
   peer: s2-brdr1
   peer_interface: Ethernet3
@@ -183,7 +183,7 @@ ethernet_interfaces:
   shutdown: false
   mtu: 1500
   type: routed
-  ip_address: 172.32.255.26/31
+  ip_address: 172.32.255.218/31
 - name: Ethernet8
   peer: s2-brdr2
   peer_interface: Ethernet3
@@ -192,7 +192,7 @@ ethernet_interfaces:
   shutdown: false
   mtu: 1500
   type: routed
-  ip_address: 172.32.255.30/31
+  ip_address: 172.32.255.222/31
 loopback_interfaces:
 - name: Loopback0
   description: EVPN_Overlay_Peering

@@ -107,34 +107,34 @@
 
 | Node | Node Interface | Node IP Address | Peer Node | Peer Interface | Peer IP Address |
 | ---- | -------------- | --------------- | --------- | -------------- | --------------- |
-| s1-brdr1 | Ethernet2 | 172.30.255.25/31 | s1-spine1 | Ethernet7 | 172.30.255.24/31 |
-| s1-brdr1 | Ethernet3 | 172.30.255.27/31 | s1-spine2 | Ethernet7 | 172.30.255.26/31 |
+| s1-brdr1 | Ethernet2 | 172.30.255.57/31 | s1-spine1 | Ethernet7 | 172.30.255.56/31 |
+| s1-brdr1 | Ethernet3 | 172.30.255.59/31 | s1-spine2 | Ethernet7 | 172.30.255.58/31 |
 | s1-brdr1 | Ethernet4 | 172.16.30.0/31 | s1-core1 | Ethernet2 | 172.16.30.1/31 |
-| s1-brdr2 | Ethernet2 | 172.30.255.29/31 | s1-spine1 | Ethernet8 | 172.30.255.28/31 |
-| s1-brdr2 | Ethernet3 | 172.30.255.31/31 | s1-spine2 | Ethernet8 | 172.30.255.30/31 |
+| s1-brdr2 | Ethernet2 | 172.30.255.61/31 | s1-spine1 | Ethernet8 | 172.30.255.60/31 |
+| s1-brdr2 | Ethernet3 | 172.30.255.63/31 | s1-spine2 | Ethernet8 | 172.30.255.62/31 |
 | s1-brdr2 | Ethernet5 | 172.16.30.2/31 | s1-core2 | Ethernet3 | 172.16.30.3/31 |
-| s1-leaf1 | Ethernet2 | 172.30.255.9/31 | s1-spine1 | Ethernet2 | 172.30.255.8/31 |
-| s1-leaf1 | Ethernet3 | 172.30.255.11/31 | s1-spine2 | Ethernet2 | 172.30.255.10/31 |
-| s1-leaf2 | Ethernet2 | 172.30.255.13/31 | s1-spine1 | Ethernet3 | 172.30.255.12/31 |
-| s1-leaf2 | Ethernet3 | 172.30.255.15/31 | s1-spine2 | Ethernet3 | 172.30.255.14/31 |
-| s1-leaf3 | Ethernet2 | 172.30.255.17/31 | s1-spine1 | Ethernet4 | 172.30.255.16/31 |
-| s1-leaf3 | Ethernet3 | 172.30.255.19/31 | s1-spine2 | Ethernet4 | 172.30.255.18/31 |
-| s1-leaf4 | Ethernet2 | 172.30.255.21/31 | s1-spine1 | Ethernet5 | 172.30.255.20/31 |
-| s1-leaf4 | Ethernet3 | 172.30.255.23/31 | s1-spine2 | Ethernet5 | 172.30.255.22/31 |
-| s2-brdr1 | Ethernet2 | 172.32.255.25/31 | s2-spine1 | Ethernet7 | 172.32.255.24/31 |
-| s2-brdr1 | Ethernet3 | 172.32.255.27/31 | s2-spine2 | Ethernet7 | 172.32.255.26/31 |
+| s1-leaf1 | Ethernet2 | 172.30.255.41/31 | s1-spine1 | Ethernet2 | 172.30.255.40/31 |
+| s1-leaf1 | Ethernet3 | 172.30.255.43/31 | s1-spine2 | Ethernet2 | 172.30.255.42/31 |
+| s1-leaf2 | Ethernet2 | 172.30.255.45/31 | s1-spine1 | Ethernet3 | 172.30.255.44/31 |
+| s1-leaf2 | Ethernet3 | 172.30.255.47/31 | s1-spine2 | Ethernet3 | 172.30.255.46/31 |
+| s1-leaf3 | Ethernet2 | 172.30.255.49/31 | s1-spine1 | Ethernet4 | 172.30.255.48/31 |
+| s1-leaf3 | Ethernet3 | 172.30.255.51/31 | s1-spine2 | Ethernet4 | 172.30.255.50/31 |
+| s1-leaf4 | Ethernet2 | 172.30.255.53/31 | s1-spine1 | Ethernet5 | 172.30.255.52/31 |
+| s1-leaf4 | Ethernet3 | 172.30.255.55/31 | s1-spine2 | Ethernet5 | 172.30.255.54/31 |
+| s2-brdr1 | Ethernet2 | 172.32.255.217/31 | s2-spine1 | Ethernet7 | 172.32.255.216/31 |
+| s2-brdr1 | Ethernet3 | 172.32.255.219/31 | s2-spine2 | Ethernet7 | 172.32.255.218/31 |
 | s2-brdr1 | Ethernet4 | 172.16.30.4/31 | s2-core1 | Ethernet2 | 172.16.30.5/31 |
-| s2-brdr2 | Ethernet2 | 172.32.255.29/31 | s2-spine1 | Ethernet8 | 172.32.255.28/31 |
-| s2-brdr2 | Ethernet3 | 172.32.255.31/31 | s2-spine2 | Ethernet8 | 172.32.255.30/31 |
+| s2-brdr2 | Ethernet2 | 172.32.255.221/31 | s2-spine1 | Ethernet8 | 172.32.255.220/31 |
+| s2-brdr2 | Ethernet3 | 172.32.255.223/31 | s2-spine2 | Ethernet8 | 172.32.255.222/31 |
 | s2-brdr2 | Ethernet5 | 172.16.30.6/31 | s2-core2 | Ethernet3 | 172.16.30.7/31 |
-| s2-leaf1 | Ethernet2 | 172.32.255.9/31 | s2-spine1 | Ethernet2 | 172.32.255.8/31 |
-| s2-leaf1 | Ethernet3 | 172.32.255.11/31 | s2-spine2 | Ethernet2 | 172.32.255.10/31 |
-| s2-leaf2 | Ethernet2 | 172.32.255.13/31 | s2-spine1 | Ethernet3 | 172.32.255.12/31 |
-| s2-leaf2 | Ethernet3 | 172.32.255.15/31 | s2-spine2 | Ethernet3 | 172.32.255.14/31 |
-| s2-leaf3 | Ethernet2 | 172.32.255.17/31 | s2-spine1 | Ethernet4 | 172.32.255.16/31 |
-| s2-leaf3 | Ethernet3 | 172.32.255.19/31 | s2-spine2 | Ethernet4 | 172.32.255.18/31 |
-| s2-leaf4 | Ethernet2 | 172.32.255.21/31 | s2-spine1 | Ethernet5 | 172.32.255.20/31 |
-| s2-leaf4 | Ethernet3 | 172.32.255.23/31 | s2-spine2 | Ethernet5 | 172.32.255.22/31 |
+| s2-leaf1 | Ethernet2 | 172.32.255.201/31 | s2-spine1 | Ethernet2 | 172.32.255.200/31 |
+| s2-leaf1 | Ethernet3 | 172.32.255.203/31 | s2-spine2 | Ethernet2 | 172.32.255.202/31 |
+| s2-leaf2 | Ethernet2 | 172.32.255.205/31 | s2-spine1 | Ethernet3 | 172.32.255.204/31 |
+| s2-leaf2 | Ethernet3 | 172.32.255.207/31 | s2-spine2 | Ethernet3 | 172.32.255.206/31 |
+| s2-leaf3 | Ethernet2 | 172.32.255.209/31 | s2-spine1 | Ethernet4 | 172.32.255.208/31 |
+| s2-leaf3 | Ethernet3 | 172.32.255.211/31 | s2-spine2 | Ethernet4 | 172.32.255.210/31 |
+| s2-leaf4 | Ethernet2 | 172.32.255.213/31 | s2-spine1 | Ethernet5 | 172.32.255.212/31 |
+| s2-leaf4 | Ethernet3 | 172.32.255.215/31 | s2-spine2 | Ethernet5 | 172.32.255.214/31 |
 
 ### Loopback Interfaces (BGP EVPN Peering)
 
@@ -148,24 +148,24 @@
 
 | POD | Node | Loopback0 |
 | --- | ---- | --------- |
-| ATD_MGMT | s1-brdr1 | 192.0.255.9/32 |
-| ATD_MGMT | s1-brdr2 | 192.0.255.10/32 |
+| ATD_MGMT | s1-brdr1 | 192.0.255.17/32 |
+| ATD_MGMT | s1-brdr2 | 192.0.255.18/32 |
 | ATD_MGMT | s1-core1 | 192.168.250.1/32 |
 | ATD_MGMT | s1-core2 | 192.168.250.2/32 |
-| ATD_MGMT | s1-leaf1 | 192.0.255.5/32 |
-| ATD_MGMT | s1-leaf2 | 192.0.255.6/32 |
-| ATD_MGMT | s1-leaf3 | 192.0.255.7/32 |
-| ATD_MGMT | s1-leaf4 | 192.0.255.8/32 |
+| ATD_MGMT | s1-leaf1 | 192.0.255.13/32 |
+| ATD_MGMT | s1-leaf2 | 192.0.255.14/32 |
+| ATD_MGMT | s1-leaf3 | 192.0.255.15/32 |
+| ATD_MGMT | s1-leaf4 | 192.0.255.16/32 |
 | ATD_MGMT | s1-spine1 | 192.0.255.1/32 |
 | ATD_MGMT | s1-spine2 | 192.0.255.2/32 |
-| ATD_MGMT | s2-brdr1 | 192.2.255.9/32 |
-| ATD_MGMT | s2-brdr2 | 192.2.255.10/32 |
+| ATD_MGMT | s2-brdr1 | 192.2.255.57/32 |
+| ATD_MGMT | s2-brdr2 | 192.2.255.58/32 |
 | ATD_MGMT | s2-core1 | 192.168.250.3/32 |
 | ATD_MGMT | s2-core2 | 192.168.250.4/32 |
-| ATD_MGMT | s2-leaf1 | 192.2.255.5/32 |
-| ATD_MGMT | s2-leaf2 | 192.2.255.6/32 |
-| ATD_MGMT | s2-leaf3 | 192.2.255.7/32 |
-| ATD_MGMT | s2-leaf4 | 192.2.255.8/32 |
+| ATD_MGMT | s2-leaf1 | 192.2.255.53/32 |
+| ATD_MGMT | s2-leaf2 | 192.2.255.54/32 |
+| ATD_MGMT | s2-leaf3 | 192.2.255.55/32 |
+| ATD_MGMT | s2-leaf4 | 192.2.255.56/32 |
 | ATD_MGMT | s2-spine1 | 192.2.255.1/32 |
 | ATD_MGMT | s2-spine2 | 192.2.255.2/32 |
 
@@ -180,18 +180,18 @@
 
 | POD | Node | Loopback1 |
 | --- | ---- | --------- |
-| ATD_MGMT | s1-brdr1 | 192.0.254.9/32 |
-| ATD_MGMT | s1-brdr2 | 192.0.254.9/32 |
-| ATD_MGMT | s1-leaf1 | 192.0.254.5/32 |
-| ATD_MGMT | s1-leaf2 | 192.0.254.5/32 |
-| ATD_MGMT | s1-leaf3 | 192.0.254.7/32 |
-| ATD_MGMT | s1-leaf4 | 192.0.254.7/32 |
-| ATD_MGMT | s2-brdr1 | 192.2.254.9/32 |
-| ATD_MGMT | s2-brdr2 | 192.2.254.9/32 |
-| ATD_MGMT | s2-leaf1 | 192.2.254.5/32 |
-| ATD_MGMT | s2-leaf2 | 192.2.254.5/32 |
-| ATD_MGMT | s2-leaf3 | 192.2.254.7/32 |
-| ATD_MGMT | s2-leaf4 | 192.2.254.7/32 |
+| ATD_MGMT | s1-brdr1 | 192.0.254.17/32 |
+| ATD_MGMT | s1-brdr2 | 192.0.254.17/32 |
+| ATD_MGMT | s1-leaf1 | 192.0.254.13/32 |
+| ATD_MGMT | s1-leaf2 | 192.0.254.13/32 |
+| ATD_MGMT | s1-leaf3 | 192.0.254.15/32 |
+| ATD_MGMT | s1-leaf4 | 192.0.254.15/32 |
+| ATD_MGMT | s2-brdr1 | 192.2.254.57/32 |
+| ATD_MGMT | s2-brdr2 | 192.2.254.57/32 |
+| ATD_MGMT | s2-leaf1 | 192.2.254.53/32 |
+| ATD_MGMT | s2-leaf2 | 192.2.254.53/32 |
+| ATD_MGMT | s2-leaf3 | 192.2.254.55/32 |
+| ATD_MGMT | s2-leaf4 | 192.2.254.55/32 |
 
 ## Connected Endpoints
 

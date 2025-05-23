@@ -155,7 +155,7 @@ management api http-commands
 
 | Domain-id | Local-interface | Peer-address | Peer-link |
 | --------- | --------------- | ------------ | --------- |
-| pod22 | Vlan4094 | 10.222.252.9 | Port-Channel1 |
+| pod22 | Vlan4094 | 10.222.252.105 | Port-Channel1 |
 
 Dual primary detection is disabled.
 
@@ -166,7 +166,7 @@ Dual primary detection is disabled.
 mlag configuration
    domain-id pod22
    local-interface Vlan4094
-   peer-address 10.222.252.9
+   peer-address 10.222.252.105
    peer-link Port-Channel1
    reload-delay mlag 300
    reload-delay non-mlag 330
@@ -270,8 +270,8 @@ vlan 4094
 
 | Interface | Description | Type | Channel Group | IP Address | VRF |  MTU | Shutdown | ACL In | ACL Out |
 | --------- | ----------- | -----| ------------- | ---------- | ----| ---- | -------- | ------ | ------- |
-| Ethernet2 | P2P_LINK_TO_S2-SPINE1_Ethernet4 | routed | - | 172.32.255.17/31 | default | 1500 | False | - | - |
-| Ethernet3 | P2P_LINK_TO_S2-SPINE2_Ethernet4 | routed | - | 172.32.255.19/31 | default | 1500 | False | - | - |
+| Ethernet2 | P2P_LINK_TO_S2-SPINE1_Ethernet4 | routed | - | 172.32.255.209/31 | default | 1500 | False | - | - |
+| Ethernet3 | P2P_LINK_TO_S2-SPINE2_Ethernet4 | routed | - | 172.32.255.211/31 | default | 1500 | False | - | - |
 
 #### Ethernet Interfaces Device Configuration
 
@@ -287,14 +287,14 @@ interface Ethernet2
    no shutdown
    mtu 1500
    no switchport
-   ip address 172.32.255.17/31
+   ip address 172.32.255.209/31
 !
 interface Ethernet3
    description P2P_LINK_TO_S2-SPINE2_Ethernet4
    no shutdown
    mtu 1500
    no switchport
-   ip address 172.32.255.19/31
+   ip address 172.32.255.211/31
 !
 interface Ethernet6
    description MLAG_PEER_s2-leaf4_Ethernet6
@@ -333,9 +333,9 @@ interface Port-Channel1
 
 | Interface | Description | VRF | IP Address |
 | --------- | ----------- | --- | ---------- |
-| Loopback0 | EVPN_Overlay_Peering | default | 192.2.255.7/32 |
-| Loopback1 | VTEP_VXLAN_Tunnel_Source | default | 192.2.254.7/32 |
-| Loopback100 | bluevrf_VTEP_DIAGNOSTICS | bluevrf | 10.255.1.7/32 |
+| Loopback0 | EVPN_Overlay_Peering | default | 192.2.255.55/32 |
+| Loopback1 | VTEP_VXLAN_Tunnel_Source | default | 192.2.254.55/32 |
+| Loopback100 | bluevrf_VTEP_DIAGNOSTICS | bluevrf | 10.255.1.55/32 |
 
 ##### IPv6
 
@@ -352,18 +352,18 @@ interface Port-Channel1
 interface Loopback0
    description EVPN_Overlay_Peering
    no shutdown
-   ip address 192.2.255.7/32
+   ip address 192.2.255.55/32
 !
 interface Loopback1
    description VTEP_VXLAN_Tunnel_Source
    no shutdown
-   ip address 192.2.254.7/32
+   ip address 192.2.254.55/32
 !
 interface Loopback100
    description bluevrf_VTEP_DIAGNOSTICS
    no shutdown
    vrf bluevrf
-   ip address 10.255.1.7/32
+   ip address 10.255.1.55/32
 ```
 
 ### VLAN Interfaces
@@ -382,9 +382,9 @@ interface Loopback100
 | Interface | VRF | IP Address | IP Address Virtual | IP Router Virtual Address | VRRP | ACL In | ACL Out |
 | --------- | --- | ---------- | ------------------ | ------------------------- | ---- | ------ | ------- |
 | Vlan110 |  bluevrf  |  -  |  10.1.10.1/24  |  -  |  -  |  -  |  -  |
-| Vlan3009 |  bluevrf  |  10.222.251.8/31  |  -  |  -  |  -  |  -  |  -  |
-| Vlan4093 |  default  |  10.222.251.8/31  |  -  |  -  |  -  |  -  |  -  |
-| Vlan4094 |  default  |  10.222.252.8/31  |  -  |  -  |  -  |  -  |  -  |
+| Vlan3009 |  bluevrf  |  10.222.251.104/31  |  -  |  -  |  -  |  -  |  -  |
+| Vlan4093 |  default  |  10.222.251.104/31  |  -  |  -  |  -  |  -  |  -  |
+| Vlan4094 |  default  |  10.222.252.104/31  |  -  |  -  |  -  |  -  |  -  |
 
 #### VLAN Interfaces Device Configuration
 
@@ -401,20 +401,20 @@ interface Vlan3009
    no shutdown
    mtu 1500
    vrf bluevrf
-   ip address 10.222.251.8/31
+   ip address 10.222.251.104/31
 !
 interface Vlan4093
    description MLAG_PEER_L3_PEERING
    no shutdown
    mtu 1500
-   ip address 10.222.251.8/31
+   ip address 10.222.251.104/31
 !
 interface Vlan4094
    description MLAG_PEER
    no shutdown
    mtu 1500
    no autostate
-   ip address 10.222.252.8/31
+   ip address 10.222.252.104/31
 ```
 
 ### VXLAN Interface
@@ -530,7 +530,7 @@ ASN Notation: asplain
 
 | BGP AS | Router ID |
 | ------ | --------- |
-| 65202 | 192.2.255.7 |
+| 65202 | 192.2.255.55 |
 
 | BGP Tuning |
 | ---------- |
@@ -575,12 +575,12 @@ ASN Notation: asplain
 
 | Neighbor | Remote AS | VRF | Shutdown | Send-community | Maximum-routes | Allowas-in | BFD | RIB Pre-Policy Retain | Route-Reflector Client | Passive | TTL Max Hops |
 | -------- | --------- | --- | -------- | -------------- | -------------- | ---------- | --- | --------------------- | ---------------------- | ------- | ------------ |
-| 10.222.251.9 | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | default | - | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | - | - | - | - | - | - |
-| 172.32.255.16 | 65002 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
-| 172.32.255.18 | 65002 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
+| 10.222.251.105 | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | default | - | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | - | - | - | - | - | - |
+| 172.32.255.208 | 65002 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
+| 172.32.255.210 | 65002 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 192.2.255.1 | 65002 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 192.2.255.2 | 65002 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
-| 10.222.251.9 | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | bluevrf | - | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | - | - | - | - | - | - |
+| 10.222.251.105 | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | bluevrf | - | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | - | - | - | - | - | - |
 
 #### Router BGP EVPN Address Family
 
@@ -594,22 +594,22 @@ ASN Notation: asplain
 
 | VLAN | Route-Distinguisher | Both Route-Target | Import Route Target | Export Route-Target | Redistribute |
 | ---- | ------------------- | ----------------- | ------------------- | ------------------- | ------------ |
-| 110 | 192.2.255.7:20110 | 20110:20110 | - | - | learned |
-| 160 | 192.2.255.7:55160 | 55160:55160 | - | - | learned |
-| 360 | 192.2.255.7:55360 | 55360:55360 | - | - | learned |
+| 110 | 192.2.255.55:20110 | 20110:20110 | - | - | learned |
+| 160 | 192.2.255.55:55160 | 55160:55160 | - | - | learned |
+| 360 | 192.2.255.55:55360 | 55360:55360 | - | - | learned |
 
 #### Router BGP VRFs
 
 | VRF | Route-Distinguisher | Redistribute |
 | --- | ------------------- | ------------ |
-| bluevrf | 192.2.255.7:10 | connected |
+| bluevrf | 192.2.255.55:10 | connected |
 
 #### Router BGP Device Configuration
 
 ```eos
 !
 router bgp 65202
-   router-id 192.2.255.7
+   router-id 192.2.255.55
    distance bgp 20 200 200
    graceful-restart restart-time 300
    graceful-restart
@@ -631,14 +631,14 @@ router bgp 65202
    neighbor MLAG-IPv4-UNDERLAY-PEER send-community
    neighbor MLAG-IPv4-UNDERLAY-PEER maximum-routes 12000
    neighbor MLAG-IPv4-UNDERLAY-PEER route-map RM-MLAG-PEER-IN in
-   neighbor 10.222.251.9 peer group MLAG-IPv4-UNDERLAY-PEER
-   neighbor 10.222.251.9 description s2-leaf4
-   neighbor 172.32.255.16 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.32.255.16 remote-as 65002
-   neighbor 172.32.255.16 description s2-spine1_Ethernet4
-   neighbor 172.32.255.18 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.32.255.18 remote-as 65002
-   neighbor 172.32.255.18 description s2-spine2_Ethernet4
+   neighbor 10.222.251.105 peer group MLAG-IPv4-UNDERLAY-PEER
+   neighbor 10.222.251.105 description s2-leaf4
+   neighbor 172.32.255.208 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.32.255.208 remote-as 65002
+   neighbor 172.32.255.208 description s2-spine1_Ethernet4
+   neighbor 172.32.255.210 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.32.255.210 remote-as 65002
+   neighbor 172.32.255.210 description s2-spine2_Ethernet4
    neighbor 192.2.255.1 peer group EVPN-OVERLAY-PEERS
    neighbor 192.2.255.1 remote-as 65002
    neighbor 192.2.255.1 description s2-spine1
@@ -648,17 +648,17 @@ router bgp 65202
    redistribute connected route-map RM-CONN-2-BGP
    !
    vlan 110
-      rd 192.2.255.7:20110
+      rd 192.2.255.55:20110
       route-target both 20110:20110
       redistribute learned
    !
    vlan 160
-      rd 192.2.255.7:55160
+      rd 192.2.255.55:55160
       route-target both 55160:55160
       redistribute learned
    !
    vlan 360
-      rd 192.2.255.7:55360
+      rd 192.2.255.55:55360
       route-target both 55360:55360
       redistribute learned
    !
@@ -671,11 +671,11 @@ router bgp 65202
       neighbor MLAG-IPv4-UNDERLAY-PEER activate
    !
    vrf bluevrf
-      rd 192.2.255.7:10
+      rd 192.2.255.55:10
       route-target import evpn 10:10
       route-target export evpn 10:10
-      router-id 192.2.255.7
-      neighbor 10.222.251.9 peer group MLAG-IPv4-UNDERLAY-PEER
+      router-id 192.2.255.55
+      neighbor 10.222.251.105 peer group MLAG-IPv4-UNDERLAY-PEER
       redistribute connected
 ```
 
@@ -783,11 +783,11 @@ vrf instance bluevrf
 
 | Source NAT VRF | Source NAT IP Address |
 | -------------- | --------------------- |
-| bluevrf | 10.255.1.7 |
+| bluevrf | 10.255.1.55 |
 
 ### Virtual Source NAT Configuration
 
 ```eos
 !
-ip address virtual source-nat vrf bluevrf address 10.255.1.7
+ip address virtual source-nat vrf bluevrf address 10.255.1.55
 ```
