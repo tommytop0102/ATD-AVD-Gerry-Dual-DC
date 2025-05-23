@@ -14,17 +14,17 @@ Interface                      Status         Protocol           Description
 Et1                            up             up                 MLAG_PEER_s1-leaf4_Ethernet1
 Et2                            up             up                 P2P_LINK_TO_S1-SPINE1_Ethernet4
 Et3                            up             up                 P2P_LINK_TO_S1-SPINE2_Ethernet4
-Et4                            up             up                 s1-host2_Eth1
+Et4                            up             up                 s1-host2_NIC1
 Et6                            up             up                 MLAG_PEER_s1-leaf4_Ethernet6
 Lo0                            up             up                 EVPN_Overlay_Peering
 Lo1                            up             up                 VTEP_VXLAN_Tunnel_Source
-Lo100                          up             up                 Tenant_A_OP_Zone_VTEP_DIAGNOSTICS
-Ma0                            up             up                 
+Lo100                          up             up                 bluevrf_VTEP_DIAGNOSTICS
+Ma0                            up             up                 oob_management
 Po1                            up             up                 MLAG_PEER_s1-leaf4_Po1
 Po4                            down           lowerlayerdown     s1-host2_PortChannel
-Vl110                          up             up                 Tenant_A_OP_Zone_1
-Vl1199                         up             up                 
-Vl3009                         up             up                 MLAG_PEER_L3_iBGP: vrf Tenant_A_OP_Zone
+Vl110                          up             up                 bluevrf_OP_Zone_1
+Vl1198                         up             up                 
+Vl3009                         up             up                 MLAG_PEER_L3_iBGP: vrf bluevrf
 Vl4093                         up             up                 MLAG_PEER_L3_PEERING
 Vl4094                         up             up                 MLAG_PEER
 Vx1                            up             up                 s1-leaf3_VTEP
@@ -35,24 +35,24 @@ Vx1                            up             up                 s1-leaf3_VTEP
 Address
 Interface       IP Address           Status     Protocol         MTU    Owner  
 --------------- -------------------- ---------- ------------ ---------- -------
-Ethernet2       172.30.255.9/31      up         up              1500           
-Ethernet3       172.30.255.11/31     up         up              1500           
-Loopback0       192.0.255.5/32       up         up             65535           
-Loopback1       192.0.254.5/32       up         up             65535           
-Loopback100     10.255.1.5/32        up         up             65535           
+Ethernet2       172.30.255.17/31     up         up              1500           
+Ethernet3       172.30.255.19/31     up         up              1500           
+Loopback0       192.0.255.7/32       up         up             65535           
+Loopback1       192.0.254.7/32       up         up             65535           
+Loopback100     10.255.1.7/32        up         up             65535           
 Management0     192.168.0.14/24      up         up              1500           
 Vlan110         10.1.10.1/24         up         up              1500           
-Vlan1199        unassigned           up         up              9164           
-Vlan3009        10.255.251.4/31      up         up              1500           
-Vlan4093        10.255.251.4/31      up         up              1500           
-Vlan4094        10.255.252.4/31      up         up              1500
+Vlan1198        unassigned           up         up              9164           
+Vlan3009        10.255.251.8/31      up         up              1500           
+Vlan4093        10.255.251.8/31      up         up              1500           
+Vlan4094        10.255.252.8/31      up         up              1500
 ```
 ## show lldp neighbors
 
 ```
-Last table change time   : 2:07:12 ago
-Number of table inserts  : 6
-Number of table deletes  : 1
+Last table change time   : 3:48:34 ago
+Number of table inserts  : 5
+Number of table deletes  : 0
 Number of table drops    : 0
 Number of table age-outs : 0
 
@@ -96,6 +96,7 @@ service routing protocols model multi-agent
 !
 hostname s1-leaf3
 ip name-server vrf default 8.8.8.8
+ip name-server vrf default 168.95.1.1
 ip name-server vrf default 192.168.2.1
 dns domain atd.lab
 !
@@ -108,16 +109,16 @@ system l1
    unsupported error-correction action error
 !
 vlan 110
-   name Tenant_A_OP_Zone_1
+   name bluevrf_OP_Zone_1
 !
 vlan 160
-   name Tenant_A_VMOTION
+   name bluevrf_VMOTION
 !
 vlan 360
-   name Tenant_A_V360
+   name bluevrf_V360
 !
 vlan 3009
-   name MLAG_iBGP_Tenant_A_OP_Zone
+   name MLAG_iBGP_bluevrf
    trunk group LEAF_PEER_L3
 !
 vlan 4093
@@ -128,7 +129,7 @@ vlan 4094
    name MLAG_PEER
    trunk group MLAG
 !
-vrf instance Tenant_A_OP_Zone
+vrf instance bluevrf
 !
 radius-server host 192.168.0.1 key 7 0207165218120E
 !
@@ -148,9 +149,11 @@ interface Port-Channel1
 interface Port-Channel4
    description s1-host2_PortChannel
    mtu 9000
-   switchport trunk allowed vlan 110-112,210-212,360-960
+   switchport trunk allowed vlan 110-112,210-212,360-460
    switchport mode trunk
    mlag 4
+   spanning-tree portfast
+   spanning-tree bpduguard enable
 !
 interface Ethernet1
    description MLAG_PEER_s1-leaf4_Ethernet1
@@ -160,16 +163,16 @@ interface Ethernet2
    description P2P_LINK_TO_S1-SPINE1_Ethernet4
    mtu 1500
    no switchport
-   ip address 172.30.255.9/31
+   ip address 172.30.255.17/31
 !
 interface Ethernet3
    description P2P_LINK_TO_S1-SPINE2_Ethernet4
    mtu 1500
    no switchport
-   ip address 172.30.255.11/31
+   ip address 172.30.255.19/31
 !
 interface Ethernet4
-   description s1-host2_Eth1
+   description s1-host2_NIC1
    channel-group 4 mode active
 !
 interface Ethernet6
@@ -178,42 +181,42 @@ interface Ethernet6
 !
 interface Loopback0
    description EVPN_Overlay_Peering
-   ip address 192.0.255.5/32
+   ip address 192.0.255.7/32
 !
 interface Loopback1
    description VTEP_VXLAN_Tunnel_Source
-   ip address 192.0.254.5/32
+   ip address 192.0.254.7/32
 !
 interface Loopback100
-   description Tenant_A_OP_Zone_VTEP_DIAGNOSTICS
-   vrf Tenant_A_OP_Zone
-   ip address 10.255.1.5/32
+   description bluevrf_VTEP_DIAGNOSTICS
+   vrf bluevrf
+   ip address 10.255.1.7/32
 !
 interface Management0
    description oob_management
    ip address 192.168.0.14/24
 !
 interface Vlan110
-   description Tenant_A_OP_Zone_1
-   vrf Tenant_A_OP_Zone
+   description bluevrf_OP_Zone_1
+   vrf bluevrf
    ip address virtual 10.1.10.1/24
 !
 interface Vlan3009
-   description MLAG_PEER_L3_iBGP: vrf Tenant_A_OP_Zone
+   description MLAG_PEER_L3_iBGP: vrf bluevrf
    mtu 1500
-   vrf Tenant_A_OP_Zone
-   ip address 10.255.251.4/31
+   vrf bluevrf
+   ip address 10.255.251.8/31
 !
 interface Vlan4093
    description MLAG_PEER_L3_PEERING
    mtu 1500
-   ip address 10.255.251.4/31
+   ip address 10.255.251.8/31
 !
 interface Vlan4094
    description MLAG_PEER
    mtu 1500
    no autostate
-   ip address 10.255.252.4/31
+   ip address 10.255.252.8/31
 !
 interface Vxlan1
    description s1-leaf3_VTEP
@@ -223,13 +226,13 @@ interface Vxlan1
    vxlan vlan 110 vni 20110
    vxlan vlan 160 vni 55160
    vxlan vlan 360 vni 55360
-   vxlan vrf Tenant_A_OP_Zone vni 10
+   vxlan vrf bluevrf vni 10
 !
 ip virtual-router mac-address 00:1c:73:00:dc:01
-ip address virtual source-nat vrf Tenant_A_OP_Zone address 10.255.1.5
+ip address virtual source-nat vrf bluevrf address 10.255.1.7
 !
 ip routing
-ip routing vrf Tenant_A_OP_Zone
+ip routing vrf bluevrf
 !
 ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
    seq 10 permit 192.0.255.0/24 eq 32
@@ -238,14 +241,16 @@ ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
 mlag configuration
    domain-id pod2
    local-interface Vlan4094
-   peer-address 10.255.252.5
+   peer-address 10.255.252.9
    peer-link Port-Channel1
    reload-delay mlag 300
    reload-delay non-mlag 330
 !
 ip route 0.0.0.0/0 192.168.0.1
 !
+ntp server 10.70.32.147 prefer iburst
 ntp server 192.168.0.1 iburst source Management0
+ntp server time.google.com prefer iburst
 !
 ip radius source-interface Management0
 !
@@ -260,7 +265,7 @@ router bfd
    multihop interval 1200 min-rx 1200 multiplier 3
 !
 router bgp 65102
-   router-id 192.0.255.5
+   router-id 192.0.255.7
    no bgp default ipv4-unicast
    distance bgp 20 200 200
    graceful-restart restart-time 300
@@ -270,11 +275,9 @@ router bgp 65102
    neighbor EVPN-OVERLAY-PEERS update-source Loopback0
    neighbor EVPN-OVERLAY-PEERS bfd
    neighbor EVPN-OVERLAY-PEERS ebgp-multihop 3
-   neighbor EVPN-OVERLAY-PEERS password 7 q+VNViP5i4rVjW1cxFv2wA==
    neighbor EVPN-OVERLAY-PEERS send-community
    neighbor EVPN-OVERLAY-PEERS maximum-routes 0
    neighbor IPv4-UNDERLAY-PEERS peer group
-   neighbor IPv4-UNDERLAY-PEERS password 7 AQQvKeimxJu+uGQ/yYvv9w==
    neighbor IPv4-UNDERLAY-PEERS send-community
    neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
    neighbor MLAG-IPv4-UNDERLAY-PEER peer group
@@ -282,17 +285,16 @@ router bgp 65102
    neighbor MLAG-IPv4-UNDERLAY-PEER next-hop-self
    neighbor MLAG-IPv4-UNDERLAY-PEER description s1-leaf4
    neighbor MLAG-IPv4-UNDERLAY-PEER route-map RM-MLAG-PEER-IN in
-   neighbor MLAG-IPv4-UNDERLAY-PEER password 7 vnEaG8gMeQf3d3cN6PktXQ==
    neighbor MLAG-IPv4-UNDERLAY-PEER send-community
    neighbor MLAG-IPv4-UNDERLAY-PEER maximum-routes 12000
-   neighbor 10.255.251.5 peer group MLAG-IPv4-UNDERLAY-PEER
-   neighbor 10.255.251.5 description s1-leaf4
-   neighbor 172.30.255.8 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.30.255.8 remote-as 65001
-   neighbor 172.30.255.8 description s1-spine1_Ethernet4
-   neighbor 172.30.255.10 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.30.255.10 remote-as 65001
-   neighbor 172.30.255.10 description s1-spine2_Ethernet4
+   neighbor 10.255.251.9 peer group MLAG-IPv4-UNDERLAY-PEER
+   neighbor 10.255.251.9 description s1-leaf4
+   neighbor 172.30.255.16 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.30.255.16 remote-as 65001
+   neighbor 172.30.255.16 description s1-spine1_Ethernet4
+   neighbor 172.30.255.18 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.30.255.18 remote-as 65001
+   neighbor 172.30.255.18 description s1-spine2_Ethernet4
    neighbor 192.0.255.1 peer group EVPN-OVERLAY-PEERS
    neighbor 192.0.255.1 remote-as 65001
    neighbor 192.0.255.1 description s1-spine1
@@ -302,17 +304,17 @@ router bgp 65102
    redistribute connected route-map RM-CONN-2-BGP
    !
    vlan 110
-      rd 192.0.255.5:20110
+      rd 192.0.255.7:20110
       route-target both 20110:20110
       redistribute learned
    !
    vlan 160
-      rd 192.0.255.5:55160
+      rd 192.0.255.7:55160
       route-target both 55160:55160
       redistribute learned
    !
    vlan 360
-      rd 192.0.255.5:55360
+      rd 192.0.255.7:55360
       route-target both 55360:55360
       redistribute learned
    !
@@ -324,12 +326,12 @@ router bgp 65102
       neighbor IPv4-UNDERLAY-PEERS activate
       neighbor MLAG-IPv4-UNDERLAY-PEER activate
    !
-   vrf Tenant_A_OP_Zone
-      rd 192.0.255.5:10
+   vrf bluevrf
+      rd 192.0.255.7:10
       route-target import evpn 10:10
       route-target export evpn 10:10
-      router-id 192.0.255.5
-      neighbor 10.255.251.5 peer group MLAG-IPv4-UNDERLAY-PEER
+      router-id 192.0.255.7
+      neighbor 10.255.251.9 peer group MLAG-IPv4-UNDERLAY-PEER
       redistribute connected
 !
 router multicast
@@ -360,7 +362,7 @@ Image optimization: None
 
 Kernel version: 5.14.0-503.21.1.el9_5.x86_64
 
-Uptime: 5 hours and 33 minutes
-Total memory: 49062196 kB
-Free memory: 3219156 kB
+Uptime: 1 hour and 38 minutes
+Total memory: 49062200 kB
+Free memory: 3317192 kB
 ```

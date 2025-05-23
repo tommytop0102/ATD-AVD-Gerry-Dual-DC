@@ -196,7 +196,8 @@ cvp_configlets:
     model multi-agent\n!\nhostname s1-core1\ndns domain atd.lab\n!\nspanning-tree
     mode none\n!\nno enable password\nno aaa root\n!\ninterface Ethernet2\n   description
     P2P_LINK_TO_s1-brdr1_Ethernet4\n   no shutdown\n   mtu 9214\n   no switchport\n
-    \  ip address 172.16.30.1/31\n!\ninterface Loopback0\n   description EVPN_Overlay_Peering\n
+    \  ip address 172.16.30.1/31\n!\ninterface Ethernet4\n   no shutdown\n   no switchport\n
+    \  ip address 30.1.1.1/24\n!\ninterface Loopback0\n   description EVPN_Overlay_Peering\n
     \  no shutdown\n   ip address 192.168.250.1/32\n!\ninterface Management0\n   description
     oob_management\n   no shutdown\n   ip address 192.168.0.102/24\n!\nip routing\n!\nip
     prefix-list PL-LOOPBACKS-EVPN-OVERLAY\n   seq 10 permit 192.168.250.0/24 eq 32\n!\nip
@@ -205,8 +206,9 @@ cvp_configlets:
     192.168.250.1\n   distance bgp 20 200 200\n   maximum-paths 4 ecmp 4\n   no bgp
     default ipv4-unicast\n   neighbor IPv4-UNDERLAY-PEERS peer group\n   neighbor
     IPv4-UNDERLAY-PEERS send-community\n   neighbor IPv4-UNDERLAY-PEERS maximum-routes
-    12000\n   neighbor 172.16.30.0 peer group IPv4-UNDERLAY-PEERS\n   neighbor 172.16.30.0
-    remote-as 65103\n   neighbor 172.16.30.0 description s1-brdr1\n   redistribute
+    12000\n   neighbor 30.1.1.2 peer group IPv4-UNDERLAY-PEERS\n   neighbor 30.1.1.2
+    remote-as 65301\n   neighbor 172.16.30.0 peer group IPv4-UNDERLAY-PEERS\n   neighbor
+    172.16.30.0 remote-as 65103\n   neighbor 172.16.30.0 description s1-brdr1\n   redistribute
     connected route-map RM-CONN-2-BGP\n   !\n   address-family ipv4\n      neighbor
     IPv4-UNDERLAY-PEERS activate\n!\nmanagement api http-commands\n   protocol https\n
     \  no shutdown\n   !\n   vrf default\n      no shutdown\n!\nend\n"
@@ -215,7 +217,8 @@ cvp_configlets:
     model multi-agent\n!\nhostname s1-core2\ndns domain atd.lab\n!\nspanning-tree
     mode none\n!\nno enable password\nno aaa root\n!\ninterface Ethernet3\n   description
     P2P_LINK_TO_s1-brdr2_Ethernet5\n   no shutdown\n   mtu 9214\n   no switchport\n
-    \  ip address 172.16.30.3/31\n!\ninterface Loopback0\n   description EVPN_Overlay_Peering\n
+    \  ip address 172.16.30.3/31\n!\ninterface Ethernet4\n   no shutdown\n   no switchport\n
+    \  ip address 30.2.2.1/24\n!\ninterface Loopback0\n   description EVPN_Overlay_Peering\n
     \  no shutdown\n   ip address 192.168.250.2/32\n!\ninterface Management0\n   description
     oob_management\n   no shutdown\n   ip address 192.168.0.103/24\n!\nip routing\n!\nip
     prefix-list PL-LOOPBACKS-EVPN-OVERLAY\n   seq 10 permit 192.168.250.0/24 eq 32\n!\nip
@@ -224,8 +227,9 @@ cvp_configlets:
     192.168.250.2\n   distance bgp 20 200 200\n   maximum-paths 4 ecmp 4\n   no bgp
     default ipv4-unicast\n   neighbor IPv4-UNDERLAY-PEERS peer group\n   neighbor
     IPv4-UNDERLAY-PEERS send-community\n   neighbor IPv4-UNDERLAY-PEERS maximum-routes
-    12000\n   neighbor 172.16.30.2 peer group IPv4-UNDERLAY-PEERS\n   neighbor 172.16.30.2
-    remote-as 65103\n   neighbor 172.16.30.2 description s1-brdr2\n   redistribute
+    12000\n   neighbor 30.2.2.2 peer group IPv4-UNDERLAY-PEERS\n   neighbor 30.2.2.2
+    remote-as 65301\n   neighbor 172.16.30.2 peer group IPv4-UNDERLAY-PEERS\n   neighbor
+    172.16.30.2 remote-as 65103\n   neighbor 172.16.30.2 description s1-brdr2\n   redistribute
     connected route-map RM-CONN-2-BGP\n   !\n   address-family ipv4\n      neighbor
     IPv4-UNDERLAY-PEERS activate\n!\nmanagement api http-commands\n   protocol https\n
     \  no shutdown\n   !\n   vrf default\n      no shutdown\n!\nend\n"
@@ -857,7 +861,8 @@ cvp_configlets:
     model multi-agent\n!\nhostname s2-core1\ndns domain atd.lab\n!\nspanning-tree
     mode none\n!\nno enable password\nno aaa root\n!\ninterface Ethernet2\n   description
     P2P_LINK_TO_s2-brdr1_Ethernet4\n   no shutdown\n   mtu 9214\n   no switchport\n
-    \  ip address 172.16.30.5/31\n!\ninterface Loopback0\n   description EVPN_Overlay_Peering\n
+    \  ip address 172.16.30.5/31\n!\ninterface Ethernet4\n   no shutdown\n   no switchport\n
+    \  ip address 30.1.1.2/24\n!\ninterface Loopback0\n   description EVPN_Overlay_Peering\n
     \  no shutdown\n   ip address 192.168.250.3/32\n!\ninterface Management0\n   description
     oob_management\n   no shutdown\n   ip address 192.168.0.202/24\n!\nip routing\n!\nip
     prefix-list PL-LOOPBACKS-EVPN-OVERLAY\n   seq 10 permit 192.168.250.0/24 eq 32\n!\nip
@@ -866,8 +871,9 @@ cvp_configlets:
     192.168.250.3\n   distance bgp 20 200 200\n   maximum-paths 4 ecmp 4\n   no bgp
     default ipv4-unicast\n   neighbor IPv4-UNDERLAY-PEERS peer group\n   neighbor
     IPv4-UNDERLAY-PEERS send-community\n   neighbor IPv4-UNDERLAY-PEERS maximum-routes
-    12000\n   neighbor 172.16.30.4 peer group IPv4-UNDERLAY-PEERS\n   neighbor 172.16.30.4
-    remote-as 65203\n   neighbor 172.16.30.4 description s2-brdr1\n   redistribute
+    12000\n   neighbor 30.1.1.1 peer group IPv4-UNDERLAY-PEERS\n   neighbor 30.1.1.1
+    remote-as 65300\n   neighbor 172.16.30.4 peer group IPv4-UNDERLAY-PEERS\n   neighbor
+    172.16.30.4 remote-as 65203\n   neighbor 172.16.30.4 description s2-brdr1\n   redistribute
     connected route-map RM-CONN-2-BGP\n   !\n   address-family ipv4\n      neighbor
     IPv4-UNDERLAY-PEERS activate\n!\nmanagement api http-commands\n   protocol https\n
     \  no shutdown\n   !\n   vrf default\n      no shutdown\n!\nend\n"
@@ -876,7 +882,8 @@ cvp_configlets:
     model multi-agent\n!\nhostname s2-core2\ndns domain atd.lab\n!\nspanning-tree
     mode none\n!\nno enable password\nno aaa root\n!\ninterface Ethernet3\n   description
     P2P_LINK_TO_s2-brdr2_Ethernet5\n   no shutdown\n   mtu 9214\n   no switchport\n
-    \  ip address 172.16.30.7/31\n!\ninterface Loopback0\n   description EVPN_Overlay_Peering\n
+    \  ip address 172.16.30.7/31\n!\ninterface Ethernet4\n   no shutdown\n   no switchport\n
+    \  ip address 30.2.2.2/24\n!\ninterface Loopback0\n   description EVPN_Overlay_Peering\n
     \  no shutdown\n   ip address 192.168.250.4/32\n!\ninterface Management0\n   description
     oob_management\n   no shutdown\n   ip address 192.168.0.203/24\n!\nip routing\n!\nip
     prefix-list PL-LOOPBACKS-EVPN-OVERLAY\n   seq 10 permit 192.168.250.0/24 eq 32\n!\nip
@@ -885,8 +892,9 @@ cvp_configlets:
     192.168.250.4\n   distance bgp 20 200 200\n   maximum-paths 4 ecmp 4\n   no bgp
     default ipv4-unicast\n   neighbor IPv4-UNDERLAY-PEERS peer group\n   neighbor
     IPv4-UNDERLAY-PEERS send-community\n   neighbor IPv4-UNDERLAY-PEERS maximum-routes
-    12000\n   neighbor 172.16.30.6 peer group IPv4-UNDERLAY-PEERS\n   neighbor 172.16.30.6
-    remote-as 65203\n   neighbor 172.16.30.6 description s2-brdr2\n   redistribute
+    12000\n   neighbor 30.2.2.1 peer group IPv4-UNDERLAY-PEERS\n   neighbor 30.2.2.1
+    remote-as 65300\n   neighbor 172.16.30.6 peer group IPv4-UNDERLAY-PEERS\n   neighbor
+    172.16.30.6 remote-as 65203\n   neighbor 172.16.30.6 description s2-brdr2\n   redistribute
     connected route-map RM-CONN-2-BGP\n   !\n   address-family ipv4\n      neighbor
     IPv4-UNDERLAY-PEERS activate\n!\nmanagement api http-commands\n   protocol https\n
     \  no shutdown\n   !\n   vrf default\n      no shutdown\n!\nend\n"

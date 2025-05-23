@@ -6,12 +6,12 @@ Et4                            up             up                 teset etherent4
 Et6                            up             up                 MLAG_PEER_s1-leaf2_Ethernet6
 Lo0                            up             up                 EVPN_Overlay_Peering
 Lo1                            up             up                 VTEP_VXLAN_Tunnel_Source
-Lo100                          up             up                 Tenant_A_OP_Zone_VTEP_DIAGNOSTICS
+Lo100                          up             up                 bluevrf_VTEP_DIAGNOSTICS
 Ma0                            up             up                 
 Po1                            up             up                 MLAG_PEER_s1-leaf2_Po1
-Vl110                          up             up                 Tenant_A_OP_Zone_1
+Vl110                          up             up                 bluevrf_OP_Zone_1
 Vl1199                         up             up                 
-Vl3009                         up             up                 MLAG_PEER_L3_iBGP: vrf Tenant_A_OP_Zone
+Vl3009                         up             up                 MLAG_PEER_L3_iBGP: vrf bluevrf
 Vl4093                         up             up                 MLAG_PEER_L3_PEERING
 Vl4094                         up             up                 MLAG_PEER
 Vx1                            up             up                 s1-leaf1_VTEP

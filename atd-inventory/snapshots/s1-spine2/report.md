@@ -17,8 +17,8 @@ Et3                            up             up                 P2P_LINK_TO_S1-
 Et4                            up             up                 P2P_LINK_TO_S1-LEAF3_Ethernet3
 Et5                            up             up                 P2P_LINK_TO_S1-LEAF4_Ethernet3
 Et6                            up             up                 
-Et7                            down           down               
-Et8                            down           down               
+Et7                            up             up                 P2P_LINK_TO_S1-BRDR1_Ethernet3
+Et8                            up             up                 P2P_LINK_TO_S1-BRDR2_Ethernet3
 Lo0                            up             up                 EVPN_Overlay_Peering
 Ma0                            up             up
 ```
@@ -28,19 +28,21 @@ Ma0                            up             up
 Address
 Interface       IP Address           Status     Protocol         MTU    Owner  
 --------------- -------------------- ---------- ------------ ---------- -------
-Ethernet2       172.30.255.2/31      up         up              1500           
-Ethernet3       172.30.255.6/31      up         up              1500           
-Ethernet4       172.30.255.10/31     up         up              1500           
-Ethernet5       172.30.255.14/31     up         up              1500           
+Ethernet2       172.30.255.10/31     up         up              1500           
+Ethernet3       172.30.255.14/31     up         up              1500           
+Ethernet4       172.30.255.18/31     up         up              1500           
+Ethernet5       172.30.255.22/31     up         up              1500           
+Ethernet7       172.30.255.26/31     up         up              1500           
+Ethernet8       172.30.255.30/31     up         up              1500           
 Loopback0       192.0.255.2/32       up         up             65535           
 Management0     192.168.0.11/24      up         up              1500
 ```
 ## show lldp neighbors
 
 ```
-Last table change time   : 7:45:19 ago
+Last table change time   : 3:48:24 ago
 Number of table inserts  : 8
-Number of table deletes  : 2
+Number of table deletes  : 0
 Number of table drops    : 0
 Number of table age-outs : 0
 
@@ -52,6 +54,8 @@ Et3           s1-leaf2.atd.lab         Ethernet3           120
 Et4           s1-leaf3.atd.lab         Ethernet3           120
 Et5           s1-leaf4.atd.lab         Ethernet3           120
 Et6           s1-spine1.atd.lab        Ethernet6           120
+Et7           s1-brdr1.atd.lab         Ethernet3           120
+Et8           s1-brdr2.atd.lab         Ethernet3           120
 ```
 ## show running-config
 
@@ -85,6 +89,7 @@ service routing protocols model multi-agent
 !
 hostname s1-spine2
 ip name-server vrf default 8.8.8.8
+ip name-server vrf default 168.95.1.1
 ip name-server vrf default 192.168.2.1
 dns domain atd.lab
 !
@@ -109,31 +114,39 @@ interface Ethernet2
    description P2P_LINK_TO_S1-LEAF1_Ethernet3
    mtu 1500
    no switchport
-   ip address 172.30.255.2/31
+   ip address 172.30.255.10/31
 !
 interface Ethernet3
    description P2P_LINK_TO_S1-LEAF2_Ethernet3
    mtu 1500
    no switchport
-   ip address 172.30.255.6/31
+   ip address 172.30.255.14/31
 !
 interface Ethernet4
    description P2P_LINK_TO_S1-LEAF3_Ethernet3
    mtu 1500
    no switchport
-   ip address 172.30.255.10/31
+   ip address 172.30.255.18/31
 !
 interface Ethernet5
    description P2P_LINK_TO_S1-LEAF4_Ethernet3
    mtu 1500
    no switchport
-   ip address 172.30.255.14/31
+   ip address 172.30.255.22/31
 !
 interface Ethernet6
 !
 interface Ethernet7
+   description P2P_LINK_TO_S1-BRDR1_Ethernet3
+   mtu 1500
+   no switchport
+   ip address 172.30.255.26/31
 !
 interface Ethernet8
+   description P2P_LINK_TO_S1-BRDR2_Ethernet3
+   mtu 1500
+   no switchport
+   ip address 172.30.255.30/31
 !
 interface Loopback0
    description EVPN_Overlay_Peering
@@ -150,7 +163,9 @@ ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
 !
 ip route 0.0.0.0/0 192.168.0.1
 !
+ntp server 10.70.32.147 prefer iburst
 ntp server 192.168.0.1 iburst source Management0
+ntp server time.google.com prefer iburst
 !
 ip radius source-interface Management0
 !
@@ -172,37 +187,47 @@ router bgp 65001
    neighbor EVPN-OVERLAY-PEERS update-source Loopback0
    neighbor EVPN-OVERLAY-PEERS bfd
    neighbor EVPN-OVERLAY-PEERS ebgp-multihop 3
-   neighbor EVPN-OVERLAY-PEERS password 7 q+VNViP5i4rVjW1cxFv2wA==
    neighbor EVPN-OVERLAY-PEERS send-community
    neighbor EVPN-OVERLAY-PEERS maximum-routes 0
    neighbor IPv4-UNDERLAY-PEERS peer group
-   neighbor IPv4-UNDERLAY-PEERS password 7 AQQvKeimxJu+uGQ/yYvv9w==
    neighbor IPv4-UNDERLAY-PEERS send-community
    neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
-   neighbor 172.30.255.3 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.30.255.3 remote-as 65101
-   neighbor 172.30.255.3 description s1-leaf1_Ethernet3
-   neighbor 172.30.255.7 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.30.255.7 remote-as 65101
-   neighbor 172.30.255.7 description s1-leaf2_Ethernet3
    neighbor 172.30.255.11 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.30.255.11 remote-as 65102
-   neighbor 172.30.255.11 description s1-leaf3_Ethernet3
+   neighbor 172.30.255.11 remote-as 65101
+   neighbor 172.30.255.11 description s1-leaf1_Ethernet3
    neighbor 172.30.255.15 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.30.255.15 remote-as 65102
-   neighbor 172.30.255.15 description s1-leaf4_Ethernet3
-   neighbor 192.0.255.3 peer group EVPN-OVERLAY-PEERS
-   neighbor 192.0.255.3 remote-as 65101
-   neighbor 192.0.255.3 description s1-leaf1
-   neighbor 192.0.255.4 peer group EVPN-OVERLAY-PEERS
-   neighbor 192.0.255.4 remote-as 65101
-   neighbor 192.0.255.4 description s1-leaf2
+   neighbor 172.30.255.15 remote-as 65101
+   neighbor 172.30.255.15 description s1-leaf2_Ethernet3
+   neighbor 172.30.255.19 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.30.255.19 remote-as 65102
+   neighbor 172.30.255.19 description s1-leaf3_Ethernet3
+   neighbor 172.30.255.23 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.30.255.23 remote-as 65102
+   neighbor 172.30.255.23 description s1-leaf4_Ethernet3
+   neighbor 172.30.255.27 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.30.255.27 remote-as 65103
+   neighbor 172.30.255.27 description s1-brdr1_Ethernet3
+   neighbor 172.30.255.31 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.30.255.31 remote-as 65103
+   neighbor 172.30.255.31 description s1-brdr2_Ethernet3
    neighbor 192.0.255.5 peer group EVPN-OVERLAY-PEERS
-   neighbor 192.0.255.5 remote-as 65102
-   neighbor 192.0.255.5 description s1-leaf3
+   neighbor 192.0.255.5 remote-as 65101
+   neighbor 192.0.255.5 description s1-leaf1
    neighbor 192.0.255.6 peer group EVPN-OVERLAY-PEERS
-   neighbor 192.0.255.6 remote-as 65102
-   neighbor 192.0.255.6 description s1-leaf4
+   neighbor 192.0.255.6 remote-as 65101
+   neighbor 192.0.255.6 description s1-leaf2
+   neighbor 192.0.255.7 peer group EVPN-OVERLAY-PEERS
+   neighbor 192.0.255.7 remote-as 65102
+   neighbor 192.0.255.7 description s1-leaf3
+   neighbor 192.0.255.8 peer group EVPN-OVERLAY-PEERS
+   neighbor 192.0.255.8 remote-as 65102
+   neighbor 192.0.255.8 description s1-leaf4
+   neighbor 192.0.255.9 peer group EVPN-OVERLAY-PEERS
+   neighbor 192.0.255.9 remote-as 65103
+   neighbor 192.0.255.9 description s1-brdr1
+   neighbor 192.0.255.10 peer group EVPN-OVERLAY-PEERS
+   neighbor 192.0.255.10 remote-as 65103
+   neighbor 192.0.255.10 description s1-brdr2
    redistribute connected route-map RM-CONN-2-BGP
    !
    address-family evpn
@@ -241,6 +266,6 @@ Image optimization: None
 Kernel version: 5.14.0-503.21.1.el9_5.x86_64
 
 Uptime: 1 hour and 38 minutes
-Total memory: 49062196 kB
-Free memory: 3199352 kB
+Total memory: 49062200 kB
+Free memory: 3765548 kB
 ```

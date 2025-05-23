@@ -10,7 +10,9 @@ l3leaf,s1-brdr2,Ethernet3,spine,s1-spine2,Ethernet8,True
 l3leaf,s1-brdr2,Ethernet5,super-spine,s1-core2,Ethernet3,True
 l3leaf,s1-brdr2,Ethernet6,mlag_peer,s1-brdr1,Ethernet6,True
 super-spine,s1-core1,Ethernet2,l3leaf,s1-brdr1,Ethernet4,True
+super-spine,s1-core1,Ethernet4,l3_interface,,,True
 super-spine,s1-core2,Ethernet3,l3leaf,s1-brdr2,Ethernet5,True
+super-spine,s1-core2,Ethernet4,l3_interface,,,True
 l3leaf,s1-leaf1,Ethernet1,mlag_peer,s1-leaf2,Ethernet1,True
 l3leaf,s1-leaf1,Ethernet2,spine,s1-spine1,Ethernet2,True
 l3leaf,s1-leaf1,Ethernet3,spine,s1-spine2,Ethernet2,True
@@ -54,7 +56,9 @@ l3leaf,s2-brdr2,Ethernet3,spine,s2-spine2,Ethernet8,True
 l3leaf,s2-brdr2,Ethernet5,super-spine,s2-core2,Ethernet3,True
 l3leaf,s2-brdr2,Ethernet6,mlag_peer,s2-brdr1,Ethernet6,True
 super-spine,s2-core1,Ethernet2,l3leaf,s2-brdr1,Ethernet4,True
+super-spine,s2-core1,Ethernet4,l3_interface,,,True
 super-spine,s2-core2,Ethernet3,l3leaf,s2-brdr2,Ethernet5,True
+super-spine,s2-core2,Ethernet4,l3_interface,,,True
 l3leaf,s2-leaf1,Ethernet1,mlag_peer,s2-leaf2,Ethernet1,True
 l3leaf,s2-leaf1,Ethernet2,spine,s2-spine1,Ethernet2,True
 l3leaf,s2-leaf1,Ethernet3,spine,s2-spine2,Ethernet2,True

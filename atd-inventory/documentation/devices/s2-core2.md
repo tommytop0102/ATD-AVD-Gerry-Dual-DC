@@ -139,6 +139,7 @@ vlan internal order ascending range 1006 1199
 | Interface | Description | Type | Channel Group | IP Address | VRF |  MTU | Shutdown | ACL In | ACL Out |
 | --------- | ----------- | -----| ------------- | ---------- | ----| ---- | -------- | ------ | ------- |
 | Ethernet3 | P2P_LINK_TO_s2-brdr2_Ethernet5 | routed | - | 172.16.30.7/31 | default | 9214 | False | - | - |
+| Ethernet4 | - | routed | - | 30.2.2.2/24 | default | - | False | - | - |
 
 #### Ethernet Interfaces Device Configuration
 
@@ -150,6 +151,11 @@ interface Ethernet3
    mtu 9214
    no switchport
    ip address 172.16.30.7/31
+!
+interface Ethernet4
+   no shutdown
+   no switchport
+   ip address 30.2.2.2/24
 ```
 
 ### Loopback Interfaces
@@ -258,6 +264,7 @@ ASN Notation: asplain
 
 | Neighbor | Remote AS | VRF | Shutdown | Send-community | Maximum-routes | Allowas-in | BFD | RIB Pre-Policy Retain | Route-Reflector Client | Passive | TTL Max Hops |
 | -------- | --------- | --- | -------- | -------------- | -------------- | ---------- | --- | --------------------- | ---------------------- | ------- | ------------ |
+| 30.2.2.1 | 65300 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 172.16.30.6 | 65203 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 
 #### Router BGP Device Configuration
@@ -272,6 +279,8 @@ router bgp 65301
    neighbor IPv4-UNDERLAY-PEERS peer group
    neighbor IPv4-UNDERLAY-PEERS send-community
    neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+   neighbor 30.2.2.1 peer group IPv4-UNDERLAY-PEERS
+   neighbor 30.2.2.1 remote-as 65300
    neighbor 172.16.30.6 peer group IPv4-UNDERLAY-PEERS
    neighbor 172.16.30.6 remote-as 65203
    neighbor 172.16.30.6 description s2-brdr2

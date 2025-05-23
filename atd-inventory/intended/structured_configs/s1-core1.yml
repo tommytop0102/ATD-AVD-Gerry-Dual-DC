@@ -31,6 +31,9 @@ router_bgp:
     peer: s1-brdr1
     description: s1-brdr1
     peer_group: IPv4-UNDERLAY-PEERS
+  - ip_address: 30.1.1.2
+    remote_as: '65301'
+    peer_group: IPv4-UNDERLAY-PEERS
 static_routes:
 - vrf: default
   destination_address_prefix: 0.0.0.0/0
@@ -59,7 +62,21 @@ management_api_http:
   enable_vrfs:
   - name: default
   enable_https: true
-eos_cli: alias sis show int status
+ethernet_interfaces:
+- name: Ethernet4
+  peer_type: l3_interface
+  ip_address: 30.1.1.1/24
+  shutdown: false
+  type: routed
+- name: Ethernet2
+  peer: s1-brdr1
+  peer_interface: Ethernet4
+  peer_type: l3leaf
+  description: P2P_LINK_TO_s1-brdr1_Ethernet4
+  type: routed
+  shutdown: false
+  mtu: 9214
+  ip_address: 172.16.30.1/31
 loopback_interfaces:
 - name: Loopback0
   description: EVPN_Overlay_Peering
@@ -77,15 +94,5 @@ route_maps:
     type: permit
     match:
     - ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
-ethernet_interfaces:
-- name: Ethernet2
-  peer: s1-brdr1
-  peer_interface: Ethernet4
-  peer_type: l3leaf
-  description: P2P_LINK_TO_s1-brdr1_Ethernet4
-  type: routed
-  shutdown: false
-  mtu: 9214
-  ip_address: 172.16.30.1/31
 metadata:
   platform: cEOS-LAB

@@ -27,7 +27,6 @@
 - [VRF Instances](#vrf-instances)
   - [VRF Instances Summary](#vrf-instances-summary)
   - [VRF Instances Device Configuration](#vrf-instances-device-configuration)
-- [EOS CLI Device Configuration](#eos-cli-device-configuration)
 
 ## Management
 
@@ -140,6 +139,7 @@ vlan internal order ascending range 1006 1199
 | Interface | Description | Type | Channel Group | IP Address | VRF |  MTU | Shutdown | ACL In | ACL Out |
 | --------- | ----------- | -----| ------------- | ---------- | ----| ---- | -------- | ------ | ------- |
 | Ethernet2 | P2P_LINK_TO_s1-brdr1_Ethernet4 | routed | - | 172.16.30.1/31 | default | 9214 | False | - | - |
+| Ethernet4 | - | routed | - | 30.1.1.1/24 | default | - | False | - | - |
 
 #### Ethernet Interfaces Device Configuration
 
@@ -151,6 +151,11 @@ interface Ethernet2
    mtu 9214
    no switchport
    ip address 172.16.30.1/31
+!
+interface Ethernet4
+   no shutdown
+   no switchport
+   ip address 30.1.1.1/24
 ```
 
 ### Loopback Interfaces
@@ -259,6 +264,7 @@ ASN Notation: asplain
 
 | Neighbor | Remote AS | VRF | Shutdown | Send-community | Maximum-routes | Allowas-in | BFD | RIB Pre-Policy Retain | Route-Reflector Client | Passive | TTL Max Hops |
 | -------- | --------- | --- | -------- | -------------- | -------------- | ---------- | --- | --------------------- | ---------------------- | ------- | ------------ |
+| 30.1.1.2 | 65301 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 172.16.30.0 | 65103 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 
 #### Router BGP Device Configuration
@@ -273,6 +279,8 @@ router bgp 65300
    neighbor IPv4-UNDERLAY-PEERS peer group
    neighbor IPv4-UNDERLAY-PEERS send-community
    neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
+   neighbor 30.1.1.2 peer group IPv4-UNDERLAY-PEERS
+   neighbor 30.1.1.2 remote-as 65301
    neighbor 172.16.30.0 peer group IPv4-UNDERLAY-PEERS
    neighbor 172.16.30.0 remote-as 65103
    neighbor 172.16.30.0 description s1-brdr1
@@ -330,11 +338,4 @@ route-map RM-CONN-2-BGP permit 10
 ### VRF Instances Device Configuration
 
 ```eos
-```
-
-## EOS CLI Device Configuration
-
-```eos
-!
-alias sis show int status
 ```
