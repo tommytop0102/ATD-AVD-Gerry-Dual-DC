@@ -1,0 +1,11 @@
+---
+
+
+# custom_structured_configuration_ethernet_interfaces:
+# - name: Ethernet4
+#   ip_address: 10.192.195.21/24
+#   shutdown: false
+#   vrf: Tenant_A_OP_Zone
+#   type: routed
+#   mtu: 9000
+#   description: "Routed_Interface_4"
