@@ -20,10 +20,11 @@ Et6                            up             up                 MLAG_PEER_s1-br
 Lo0                            up             up                 EVPN_Overlay_Peering
 Lo1                            up             up                 VTEP_VXLAN_Tunnel_Source
 Lo100                          up             up                 bluevrf_VTEP_DIAGNOSTICS
-Ma0                            up             up                 oob_management
+Ma0                            up             up                 
 Po1                            up             up                 MLAG_PEER_s1-brdr2_Po1
-Vl110                          up             up                 bluevrf_OP_Zone_1
-Vl1198                         up             up                 
+Vl1199                         up             up                 
+Vl2300                         up             up                 bluenet1
+Vl2301                         up             up                 bluenet2
 Vl3009                         up             up                 MLAG_PEER_L3_iBGP: vrf bluevrf
 Vl4093                         up             up                 MLAG_PEER_L3_PEERING
 Vl4094                         up             up                 MLAG_PEER
@@ -35,25 +36,26 @@ Vx1                            up             up                 s1-brdr1_VTEP
 Address
 Interface       IP Address           Status     Protocol         MTU    Owner  
 --------------- -------------------- ---------- ------------ ---------- -------
-Ethernet2       172.30.255.25/31     up         up              1500           
-Ethernet3       172.30.255.27/31     up         up              1500           
+Ethernet2       172.30.255.57/31     up         up              1500           
+Ethernet3       172.30.255.59/31     up         up              1500           
 Ethernet4       172.16.30.0/31       up         up              1500           
-Loopback0       192.0.255.9/32       up         up             65535           
-Loopback1       192.0.254.9/32       up         up             65535           
-Loopback100     10.255.1.9/32        up         up             65535           
+Loopback0       192.0.255.17/32      up         up             65535           
+Loopback1       192.0.254.17/32      up         up             65535           
+Loopback100     10.255.1.17/32       up         up             65535           
 Management0     192.168.0.100/24     up         up              1500           
-Vlan110         10.1.10.1/24         up         up              1500           
-Vlan1198        unassigned           up         up              9164           
-Vlan3009        10.255.251.12/31     up         up              1500           
-Vlan4093        10.255.251.12/31     up         up              1500           
-Vlan4094        10.255.252.12/31     up         up              1500
+Vlan1199        unassigned           up         up              9164           
+Vlan2300        192.168.11.1/24      up         up              1500           
+Vlan2301        192.168.12.1/24      up         up              1500           
+Vlan3009        10.255.251.28/31     up         up              1500           
+Vlan4093        10.255.251.28/31     up         up              1500           
+Vlan4094        10.255.252.28/31     up         up              1500
 ```
 ## show lldp neighbors
 
 ```
-Last table change time   : 2:46:56 ago
-Number of table inserts  : 6
-Number of table deletes  : 1
+Last table change time   : 6:22:33 ago
+Number of table inserts  : 9
+Number of table deletes  : 4
 Number of table drops    : 0
 Number of table age-outs : 0
 
@@ -109,14 +111,14 @@ system l1
    unsupported speed action error
    unsupported error-correction action error
 !
-vlan 110
-   name bluevrf_OP_Zone_1
+vlan 20
+   name ExternalNetwork
 !
-vlan 160
-   name bluevrf_VMOTION
+vlan 2300
+   name bluenet1
 !
-vlan 360
-   name bluevrf_V360
+vlan 2301
+   name bluenet2
 !
 vlan 3009
    name MLAG_iBGP_bluevrf
@@ -155,13 +157,13 @@ interface Ethernet2
    description P2P_LINK_TO_S1-SPINE1_Ethernet7
    mtu 1500
    no switchport
-   ip address 172.30.255.25/31
+   ip address 172.30.255.57/31
 !
 interface Ethernet3
    description P2P_LINK_TO_S1-SPINE2_Ethernet7
    mtu 1500
    no switchport
-   ip address 172.30.255.27/31
+   ip address 172.30.255.59/31
 !
 interface Ethernet4
    description P2P_LINK_TO_s1-core1_Ethernet2
@@ -177,55 +179,60 @@ interface Ethernet6
 !
 interface Loopback0
    description EVPN_Overlay_Peering
-   ip address 192.0.255.9/32
+   ip address 192.0.255.17/32
 !
 interface Loopback1
    description VTEP_VXLAN_Tunnel_Source
-   ip address 192.0.254.9/32
+   ip address 192.0.254.17/32
 !
 interface Loopback100
    description bluevrf_VTEP_DIAGNOSTICS
    vrf bluevrf
-   ip address 10.255.1.9/32
+   ip address 10.255.1.17/32
 !
 interface Management0
    description oob_management
    ip address 192.168.0.100/24
 !
-interface Vlan110
-   description bluevrf_OP_Zone_1
+interface Vlan2300
+   description bluenet1
    vrf bluevrf
-   ip address virtual 10.1.10.1/24
+   ip address virtual 192.168.11.1/24
+!
+interface Vlan2301
+   description bluenet2
+   vrf bluevrf
+   ip address virtual 192.168.12.1/24
 !
 interface Vlan3009
    description MLAG_PEER_L3_iBGP: vrf bluevrf
    mtu 1500
    vrf bluevrf
-   ip address 10.255.251.12/31
+   ip address 10.255.251.28/31
 !
 interface Vlan4093
    description MLAG_PEER_L3_PEERING
    mtu 1500
-   ip address 10.255.251.12/31
+   ip address 10.255.251.28/31
 !
 interface Vlan4094
    description MLAG_PEER
    mtu 1500
    no autostate
-   ip address 10.255.252.12/31
+   ip address 10.255.252.28/31
 !
 interface Vxlan1
    description s1-brdr1_VTEP
    vxlan source-interface Loopback1
    vxlan virtual-router encapsulation mac-address mlag-system-id
    vxlan udp-port 4789
-   vxlan vlan 110 vni 20110
-   vxlan vlan 160 vni 55160
-   vxlan vlan 360 vni 55360
+   vxlan vlan 20 vni 30020
+   vxlan vlan 2300 vni 32300
+   vxlan vlan 2301 vni 32301
    vxlan vrf bluevrf vni 10
 !
 ip virtual-router mac-address 00:1c:73:00:dc:01
-ip address virtual source-nat vrf bluevrf address 10.255.1.9
+ip address virtual source-nat vrf bluevrf address 10.255.1.17
 !
 ip routing
 ip routing vrf bluevrf
@@ -235,18 +242,18 @@ ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
    seq 20 permit 192.0.254.0/24 eq 32
 !
 mlag configuration
-   domain-id DC1_BORDER_LEAFS
+   domain-id DC1_BORDER_LEAFS_GW
    local-interface Vlan4094
-   peer-address 10.255.252.13
+   peer-address 10.255.252.29
    peer-link Port-Channel1
    reload-delay mlag 300
    reload-delay non-mlag 330
 !
 ip route 0.0.0.0/0 192.168.0.1
 !
+ntp server 10.70.32.146 prefer iburst
 ntp server 10.70.32.147 prefer iburst
 ntp server 192.168.0.1 iburst source Management0
-ntp server time.google.com prefer iburst
 !
 ip radius source-interface Management0
 !
@@ -261,7 +268,7 @@ router bfd
    multihop interval 1200 min-rx 1200 multiplier 3
 !
 router bgp 65103
-   router-id 192.0.255.9
+   router-id 192.0.255.17
    no bgp default ipv4-unicast
    distance bgp 20 200 200
    graceful-restart restart-time 300
@@ -289,50 +296,50 @@ router bgp 65103
    neighbor MLAG-IPv4-UNDERLAY-PEER route-map RM-MLAG-PEER-IN in
    neighbor MLAG-IPv4-UNDERLAY-PEER send-community
    neighbor MLAG-IPv4-UNDERLAY-PEER maximum-routes 12000
-   neighbor 10.255.251.13 peer group MLAG-IPv4-UNDERLAY-PEER
-   neighbor 10.255.251.13 description s1-brdr2
+   neighbor 10.255.251.29 peer group MLAG-IPv4-UNDERLAY-PEER
+   neighbor 10.255.251.29 description s1-brdr2
    neighbor 172.16.30.1 peer group IPv4-UNDERLAY-PEERS
    neighbor 172.16.30.1 remote-as 65300
    neighbor 172.16.30.1 description s1-core1
-   neighbor 172.30.255.24 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.30.255.24 remote-as 65001
-   neighbor 172.30.255.24 description s1-spine1_Ethernet7
-   neighbor 172.30.255.26 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.30.255.26 remote-as 65001
-   neighbor 172.30.255.26 description s1-spine2_Ethernet7
+   neighbor 172.30.255.56 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.30.255.56 remote-as 65001
+   neighbor 172.30.255.56 description s1-spine1_Ethernet7
+   neighbor 172.30.255.58 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.30.255.58 remote-as 65001
+   neighbor 172.30.255.58 description s1-spine2_Ethernet7
    neighbor 192.0.255.1 peer group EVPN-OVERLAY-PEERS
    neighbor 192.0.255.1 remote-as 65001
    neighbor 192.0.255.1 description s1-spine1
    neighbor 192.0.255.2 peer group EVPN-OVERLAY-PEERS
    neighbor 192.0.255.2 remote-as 65001
    neighbor 192.0.255.2 description s1-spine2
-   neighbor 192.2.255.9 peer group EVPN-OVERLAY-CORE
-   neighbor 192.2.255.9 remote-as 65203
-   neighbor 192.2.255.9 description s2-brdr1
-   neighbor 192.2.255.10 peer group EVPN-OVERLAY-CORE
-   neighbor 192.2.255.10 remote-as 65203
-   neighbor 192.2.255.10 description s2-brdr2
+   neighbor 192.2.255.57 peer group EVPN-OVERLAY-CORE
+   neighbor 192.2.255.57 remote-as 65203
+   neighbor 192.2.255.57 description s2-brdr1
+   neighbor 192.2.255.58 peer group EVPN-OVERLAY-CORE
+   neighbor 192.2.255.58 remote-as 65203
+   neighbor 192.2.255.58 description s2-brdr2
    redistribute connected route-map RM-CONN-2-BGP
    !
-   vlan 110
-      rd 192.0.255.9:20110
-      rd evpn domain remote 192.0.255.9:20110
-      route-target both 20110:20110
-      route-target import export evpn domain remote 20110:20110
+   vlan 20
+      rd 192.0.255.17:30020
+      rd evpn domain remote 192.0.255.17:30020
+      route-target both 30020:30020
+      route-target import export evpn domain remote 30020:30020
       redistribute learned
    !
-   vlan 160
-      rd 192.0.255.9:55160
-      rd evpn domain remote 192.0.255.9:55160
-      route-target both 55160:55160
-      route-target import export evpn domain remote 55160:55160
+   vlan 2300
+      rd 192.0.255.17:32300
+      rd evpn domain remote 192.0.255.17:32300
+      route-target both 32300:32300
+      route-target import export evpn domain remote 32300:32300
       redistribute learned
    !
-   vlan 360
-      rd 192.0.255.9:55360
-      rd evpn domain remote 192.0.255.9:55360
-      route-target both 55360:55360
-      route-target import export evpn domain remote 55360:55360
+   vlan 2301
+      rd 192.0.255.17:32301
+      rd evpn domain remote 192.0.255.17:32301
+      route-target both 32301:32301
+      route-target import export evpn domain remote 32301:32301
       redistribute learned
    !
    address-family evpn
@@ -352,11 +359,11 @@ router bgp 65103
       neighbor EVPN-OVERLAY-PEERS activate
    !
    vrf bluevrf
-      rd 192.0.255.9:10
+      rd 192.0.255.17:10
       route-target import evpn 10:10
       route-target export evpn 10:10
-      router-id 192.0.255.9
-      neighbor 10.255.251.13 peer group MLAG-IPv4-UNDERLAY-PEER
+      router-id 192.0.255.17
+      neighbor 10.255.251.29 peer group MLAG-IPv4-UNDERLAY-PEER
       redistribute connected
 !
 router multicast
@@ -387,7 +394,7 @@ Image optimization: None
 
 Kernel version: 5.14.0-503.21.1.el9_5.x86_64
 
-Uptime: 1 hour and 38 minutes
+Uptime: 1 hour and 5 minutes
 Total memory: 49062200 kB
-Free memory: 3730404 kB
+Free memory: 4113776 kB
 ```

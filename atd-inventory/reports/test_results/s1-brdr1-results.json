@@ -27,7 +27,7 @@
     ],
     "description": "Verifies the health of specific BGP peer(s).",
     "result": "success",
-    "custom_field": "BGP EVPN Peer: s2-brdr1 (IP: 192.2.255.9)"
+    "custom_field": "BGP EVPN Peer: s2-brdr1 (IP: 192.2.255.57)"
   },
   {
     "name": "s1-brdr1",
@@ -37,7 +37,7 @@
     ],
     "description": "Verifies the health of specific BGP peer(s).",
     "result": "success",
-    "custom_field": "BGP EVPN Peer: s2-brdr2 (IP: 192.2.255.10)"
+    "custom_field": "BGP EVPN Peer: s2-brdr2 (IP: 192.2.255.58)"
   },
   {
     "name": "s1-brdr1",
@@ -47,7 +47,7 @@
     ],
     "description": "Verifies the health of specific BGP peer(s).",
     "result": "success",
-    "custom_field": "BGP IPv4 Unicast Peer: s1-brdr2 (IP: 10.255.251.13)"
+    "custom_field": "BGP IPv4 Unicast Peer: s1-brdr2 (IP: 10.255.251.29)"
   },
   {
     "name": "s1-brdr1",
@@ -67,7 +67,7 @@
     ],
     "description": "Verifies the health of specific BGP peer(s).",
     "result": "success",
-    "custom_field": "BGP IPv4 Unicast Peer: s1-spine1 (IP: 172.30.255.24)"
+    "custom_field": "BGP IPv4 Unicast Peer: s1-spine1 (IP: 172.30.255.56)"
   },
   {
     "name": "s1-brdr1",
@@ -77,7 +77,7 @@
     ],
     "description": "Verifies the health of specific BGP peer(s).",
     "result": "success",
-    "custom_field": "BGP IPv4 Unicast Peer: s1-spine2 (IP: 172.30.255.26)"
+    "custom_field": "BGP IPv4 Unicast Peer: s1-spine2 (IP: 172.30.255.58)"
   },
   {
     "name": "s1-brdr1",
@@ -137,7 +137,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s1-brdr1 Loopback0 (IP: 192.0.255.9)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s1-brdr1 Loopback0 (IP: 192.0.255.17)"
   },
   {
     "name": "s1-brdr1",
@@ -147,7 +147,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s1-brdr2 Loopback0 (IP: 192.0.255.10)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s1-brdr2 Loopback0 (IP: 192.0.255.18)"
   },
   {
     "name": "s1-brdr1",
@@ -157,7 +157,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s1-core1 Loopback0 (IP: 192.168.250.1)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s1-core1 Loopback0 (IP: 192.168.250.1)"
   },
   {
     "name": "s1-brdr1",
@@ -167,7 +167,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s1-core2 Loopback0 (IP: 192.168.250.2)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s1-core2 Loopback0 (IP: 192.168.250.2)"
   },
   {
     "name": "s1-brdr1",
@@ -177,7 +177,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s1-leaf1 Loopback0 (IP: 192.0.255.5)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s1-leaf1 Loopback0 (IP: 192.0.255.13)"
   },
   {
     "name": "s1-brdr1",
@@ -187,7 +187,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s1-leaf2 Loopback0 (IP: 192.0.255.6)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s1-leaf2 Loopback0 (IP: 192.0.255.14)"
   },
   {
     "name": "s1-brdr1",
@@ -197,7 +197,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s1-leaf3 Loopback0 (IP: 192.0.255.7)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s1-leaf3 Loopback0 (IP: 192.0.255.15)"
   },
   {
     "name": "s1-brdr1",
@@ -207,7 +207,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s1-leaf4 Loopback0 (IP: 192.0.255.8)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s1-leaf4 Loopback0 (IP: 192.0.255.16)"
   },
   {
     "name": "s1-brdr1",
@@ -217,7 +217,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s1-spine1 Loopback0 (IP: 192.0.255.1)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s1-spine1 Loopback0 (IP: 192.0.255.1)"
   },
   {
     "name": "s1-brdr1",
@@ -227,7 +227,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s1-spine2 Loopback0 (IP: 192.0.255.2)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s1-spine2 Loopback0 (IP: 192.0.255.2)"
   },
   {
     "name": "s1-brdr1",
@@ -237,7 +237,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s2-brdr1 Loopback0 (IP: 192.2.255.9)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s2-brdr1 Loopback0 (IP: 192.2.255.57)"
   },
   {
     "name": "s1-brdr1",
@@ -247,7 +247,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s2-brdr2 Loopback0 (IP: 192.2.255.10)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s2-brdr2 Loopback0 (IP: 192.2.255.58)"
   },
   {
     "name": "s1-brdr1",
@@ -257,7 +257,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s2-core1 Loopback0 (IP: 192.168.250.3)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s2-core1 Loopback0 (IP: 192.168.250.3)"
   },
   {
     "name": "s1-brdr1",
@@ -267,7 +267,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s2-core2 Loopback0 (IP: 192.168.250.4)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s2-core2 Loopback0 (IP: 192.168.250.4)"
   },
   {
     "name": "s1-brdr1",
@@ -277,7 +277,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s2-leaf1 Loopback0 (IP: 192.2.255.5)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s2-leaf1 Loopback0 (IP: 192.2.255.53)"
   },
   {
     "name": "s1-brdr1",
@@ -287,7 +287,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s2-leaf2 Loopback0 (IP: 192.2.255.6)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s2-leaf2 Loopback0 (IP: 192.2.255.54)"
   },
   {
     "name": "s1-brdr1",
@@ -297,7 +297,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s2-leaf3 Loopback0 (IP: 192.2.255.7)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s2-leaf3 Loopback0 (IP: 192.2.255.55)"
   },
   {
     "name": "s1-brdr1",
@@ -307,7 +307,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s2-leaf4 Loopback0 (IP: 192.2.255.8)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s2-leaf4 Loopback0 (IP: 192.2.255.56)"
   },
   {
     "name": "s1-brdr1",
@@ -317,7 +317,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s2-spine1 Loopback0 (IP: 192.2.255.1)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s2-spine1 Loopback0 (IP: 192.2.255.1)"
   },
   {
     "name": "s1-brdr1",
@@ -327,7 +327,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: Loopback0 (IP: 192.0.255.9) - Destination: s2-spine2 Loopback0 (IP: 192.2.255.2)"
+    "custom_field": "Source: Loopback0 (IP: 192.0.255.17) - Destination: s2-spine2 Loopback0 (IP: 192.2.255.2)"
   },
   {
     "name": "s1-brdr1",
@@ -337,7 +337,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: P2P Interface Ethernet2 (IP: 172.30.255.25) - Destination: s1-spine1 Ethernet7 (IP: 172.30.255.24)"
+    "custom_field": "Source: P2P Interface Ethernet2 (IP: 172.30.255.57) - Destination: s1-spine1 Ethernet7 (IP: 172.30.255.56)"
   },
   {
     "name": "s1-brdr1",
@@ -347,7 +347,7 @@
     ],
     "description": "Test the network reachability to one or many destination IP(s).",
     "result": "success",
-    "custom_field": "Source: P2P Interface Ethernet3 (IP: 172.30.255.27) - Destination: s1-spine2 Ethernet7 (IP: 172.30.255.26)"
+    "custom_field": "Source: P2P Interface Ethernet3 (IP: 172.30.255.59) - Destination: s1-spine2 Ethernet7 (IP: 172.30.255.58)"
   },
   {
     "name": "s1-brdr1",
@@ -508,7 +508,17 @@
     ],
     "description": "Verifies the status of the provided interfaces.",
     "result": "success",
-    "custom_field": "Interface Vlan110 - bluevrf_OP_Zone_1 = 'up'"
+    "custom_field": "Interface Vlan2300 - bluenet1 = 'up'"
+  },
+  {
+    "name": "s1-brdr1",
+    "test": "VerifyInterfacesStatus",
+    "categories": [
+      "interfaces"
+    ],
+    "description": "Verifies the status of the provided interfaces.",
+    "result": "success",
+    "custom_field": "Interface Vlan2301 - bluenet2 = 'up'"
   },
   {
     "name": "s1-brdr1",
@@ -577,7 +587,7 @@
     ],
     "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
     "result": "success",
-    "custom_field": "Route: 192.0.254.5 - Peer: s1-leaf1"
+    "custom_field": "Route: 192.0.254.13 - Peer: s1-leaf1"
   },
   {
     "name": "s1-brdr1",
@@ -587,7 +597,7 @@
     ],
     "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
     "result": "success",
-    "custom_field": "Route: 192.0.254.7 - Peer: s1-leaf3"
+    "custom_field": "Route: 192.0.254.15 - Peer: s1-leaf3"
   },
   {
     "name": "s1-brdr1",
@@ -597,7 +607,7 @@
     ],
     "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
     "result": "success",
-    "custom_field": "Route: 192.0.254.9 - Peer: s1-brdr1"
+    "custom_field": "Route: 192.0.254.17 - Peer: s1-brdr1"
   },
   {
     "name": "s1-brdr1",
@@ -617,7 +627,57 @@
     ],
     "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
     "result": "success",
-    "custom_field": "Route: 192.0.255.10 - Peer: s1-brdr2"
+    "custom_field": "Route: 192.0.255.13 - Peer: s1-leaf1"
+  },
+  {
+    "name": "s1-brdr1",
+    "test": "VerifyRoutingTableEntry",
+    "categories": [
+      "routing"
+    ],
+    "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
+    "result": "success",
+    "custom_field": "Route: 192.0.255.14 - Peer: s1-leaf2"
+  },
+  {
+    "name": "s1-brdr1",
+    "test": "VerifyRoutingTableEntry",
+    "categories": [
+      "routing"
+    ],
+    "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
+    "result": "success",
+    "custom_field": "Route: 192.0.255.15 - Peer: s1-leaf3"
+  },
+  {
+    "name": "s1-brdr1",
+    "test": "VerifyRoutingTableEntry",
+    "categories": [
+      "routing"
+    ],
+    "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
+    "result": "success",
+    "custom_field": "Route: 192.0.255.16 - Peer: s1-leaf4"
+  },
+  {
+    "name": "s1-brdr1",
+    "test": "VerifyRoutingTableEntry",
+    "categories": [
+      "routing"
+    ],
+    "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
+    "result": "success",
+    "custom_field": "Route: 192.0.255.17 - Peer: s1-brdr1"
+  },
+  {
+    "name": "s1-brdr1",
+    "test": "VerifyRoutingTableEntry",
+    "categories": [
+      "routing"
+    ],
+    "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
+    "result": "success",
+    "custom_field": "Route: 192.0.255.18 - Peer: s1-brdr2"
   },
   {
     "name": "s1-brdr1",
@@ -628,56 +688,6 @@
     "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
     "result": "success",
     "custom_field": "Route: 192.0.255.2 - Peer: s1-spine2"
-  },
-  {
-    "name": "s1-brdr1",
-    "test": "VerifyRoutingTableEntry",
-    "categories": [
-      "routing"
-    ],
-    "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
-    "result": "success",
-    "custom_field": "Route: 192.0.255.5 - Peer: s1-leaf1"
-  },
-  {
-    "name": "s1-brdr1",
-    "test": "VerifyRoutingTableEntry",
-    "categories": [
-      "routing"
-    ],
-    "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
-    "result": "success",
-    "custom_field": "Route: 192.0.255.6 - Peer: s1-leaf2"
-  },
-  {
-    "name": "s1-brdr1",
-    "test": "VerifyRoutingTableEntry",
-    "categories": [
-      "routing"
-    ],
-    "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
-    "result": "success",
-    "custom_field": "Route: 192.0.255.7 - Peer: s1-leaf3"
-  },
-  {
-    "name": "s1-brdr1",
-    "test": "VerifyRoutingTableEntry",
-    "categories": [
-      "routing"
-    ],
-    "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
-    "result": "success",
-    "custom_field": "Route: 192.0.255.8 - Peer: s1-leaf4"
-  },
-  {
-    "name": "s1-brdr1",
-    "test": "VerifyRoutingTableEntry",
-    "categories": [
-      "routing"
-    ],
-    "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
-    "result": "success",
-    "custom_field": "Route: 192.0.255.9 - Peer: s1-brdr1"
   },
   {
     "name": "s1-brdr1",
@@ -727,7 +737,7 @@
     ],
     "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
     "result": "success",
-    "custom_field": "Route: 192.2.254.5 - Peer: s2-leaf1"
+    "custom_field": "Route: 192.2.254.53 - Peer: s2-leaf1"
   },
   {
     "name": "s1-brdr1",
@@ -737,7 +747,7 @@
     ],
     "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
     "result": "success",
-    "custom_field": "Route: 192.2.254.7 - Peer: s2-leaf3"
+    "custom_field": "Route: 192.2.254.55 - Peer: s2-leaf3"
   },
   {
     "name": "s1-brdr1",
@@ -747,7 +757,7 @@
     ],
     "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
     "result": "success",
-    "custom_field": "Route: 192.2.254.9 - Peer: s2-brdr1"
+    "custom_field": "Route: 192.2.254.57 - Peer: s2-brdr1"
   },
   {
     "name": "s1-brdr1",
@@ -767,16 +777,6 @@
     ],
     "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
     "result": "success",
-    "custom_field": "Route: 192.2.255.10 - Peer: s2-brdr2"
-  },
-  {
-    "name": "s1-brdr1",
-    "test": "VerifyRoutingTableEntry",
-    "categories": [
-      "routing"
-    ],
-    "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
-    "result": "success",
     "custom_field": "Route: 192.2.255.2 - Peer: s2-spine2"
   },
   {
@@ -787,7 +787,7 @@
     ],
     "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
     "result": "success",
-    "custom_field": "Route: 192.2.255.5 - Peer: s2-leaf1"
+    "custom_field": "Route: 192.2.255.53 - Peer: s2-leaf1"
   },
   {
     "name": "s1-brdr1",
@@ -797,7 +797,7 @@
     ],
     "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
     "result": "success",
-    "custom_field": "Route: 192.2.255.6 - Peer: s2-leaf2"
+    "custom_field": "Route: 192.2.255.54 - Peer: s2-leaf2"
   },
   {
     "name": "s1-brdr1",
@@ -807,7 +807,7 @@
     ],
     "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
     "result": "success",
-    "custom_field": "Route: 192.2.255.7 - Peer: s2-leaf3"
+    "custom_field": "Route: 192.2.255.55 - Peer: s2-leaf3"
   },
   {
     "name": "s1-brdr1",
@@ -817,7 +817,7 @@
     ],
     "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
     "result": "success",
-    "custom_field": "Route: 192.2.255.8 - Peer: s2-leaf4"
+    "custom_field": "Route: 192.2.255.56 - Peer: s2-leaf4"
   },
   {
     "name": "s1-brdr1",
@@ -827,7 +827,17 @@
     ],
     "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
     "result": "success",
-    "custom_field": "Route: 192.2.255.9 - Peer: s2-brdr1"
+    "custom_field": "Route: 192.2.255.57 - Peer: s2-brdr1"
+  },
+  {
+    "name": "s1-brdr1",
+    "test": "VerifyRoutingTableEntry",
+    "categories": [
+      "routing"
+    ],
+    "description": "Verifies that the provided routes are present in the routing table of a specified VRF.",
+    "result": "success",
+    "custom_field": "Route: 192.2.255.58 - Peer: s2-brdr2"
   },
   {
     "name": "s1-brdr1",

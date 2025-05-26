@@ -139,7 +139,7 @@ vlan internal order ascending range 1006 1199
 | Interface | Description | Type | Channel Group | IP Address | VRF |  MTU | Shutdown | ACL In | ACL Out |
 | --------- | ----------- | -----| ------------- | ---------- | ----| ---- | -------- | ------ | ------- |
 | Ethernet2 | P2P_LINK_TO_s1-brdr1_Ethernet4 | routed | - | 172.16.30.1/31 | default | 9214 | False | - | - |
-| Ethernet4 | - | routed | - | 30.1.1.1/24 | default | - | False | - | - |
+| Ethernet4 | TO DC2 s2-core1 eth4 | routed | - | 30.1.1.1/24 | default | - | False | - | - |
 
 #### Ethernet Interfaces Device Configuration
 
@@ -153,6 +153,7 @@ interface Ethernet2
    ip address 172.16.30.1/31
 !
 interface Ethernet4
+   description TO DC2 s2-core1 eth4
    no shutdown
    no switchport
    ip address 30.1.1.1/24

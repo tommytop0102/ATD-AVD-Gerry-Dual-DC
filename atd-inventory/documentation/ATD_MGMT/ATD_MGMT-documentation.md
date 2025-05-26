@@ -216,8 +216,10 @@
 
 | Name | Port | Fabric Device | Fabric Port | Description | Shutdown | Type | Mode | VLANs | Profile |
 | ---- | ---- | ------------- | ------------| ----------- | -------- | ---- | ---- | ----- | ------- |
-| s1-host2 | NIC1 | s1-leaf3 | Ethernet4 | s1-host2_NIC1 | False | switched | trunk | 110-112,210-212,360-460 | int_vpc_trunk_host |
-| s1-host2 | NIC2 | s1-leaf4 | Ethernet4 | s1-host2_NIC2 | False | switched | trunk | 110-112,210-212,360-460 | int_vpc_trunk_host |
+| s1-leaf3_s1-leaf4-L2_vPC1 | NIC1 | s1-leaf3 | Ethernet4 | s1-leaf3_s1-leaf4-L2_vPC1_NIC1 | False | switched | trunk | 20,2300 | int_vpc_trunk_host |
+| s1-leaf3_s1-leaf4-L2_vPC1 | NIC2 | s1-leaf4 | Ethernet4 | s1-leaf3_s1-leaf4-L2_vPC1_NIC2 | False | switched | trunk | 20,2300 | int_vpc_trunk_host |
+| s2-host1 | NIC1 | s2-leaf1 | Ethernet4 | s2-host1_NIC1 | False | switched | trunk | 110-112,222,333 | int_vpc_trunk_host |
+| s2-host1 | NIC2 | s2-leaf2 | Ethernet4 | s2-host1_NIC2 | False | switched | trunk | 110-112,222,333 | int_vpc_trunk_host |
 
 ### Port Profiles
 

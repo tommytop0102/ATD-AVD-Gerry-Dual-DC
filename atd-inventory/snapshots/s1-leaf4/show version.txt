@@ -13,6 +13,6 @@ Image optimization: None
 
 Kernel version: 5.14.0-503.21.1.el9_5.x86_64
 
-Uptime: 1 hour and 38 minutes
+Uptime: 1 hour and 5 minutes
 Total memory: 49062200 kB
-Free memory: 3158964 kB
+Free memory: 3507384 kB

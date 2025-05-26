@@ -1,34 +1,5 @@
 ---
-# L3LS Fabric Values - update these values with caution,
-# SOME CHANGES COULD BE DISRUPTIVE.
-
 fabric_name: ATD_MGMT
-
-
-
-# Enable vlan aware bundles
-# evpn_vlan_aware_bundles: true
-
-# Select rfc5549 or ospf, not both
-
-# underlay_rfc5549: true
-# overlay_mlag_rfc5549: true
-# underlay_ipv6: true
-
-# underlay_routing_protocol: OSPF
-
-# Optional, enable multicast features
-# underlay_multicast: true
-# evpn_multicast: true
-
-# bgp peer groups passwords
-bgp_peer_groups:
-  ipv4_underlay_peers:
-#    password: "AQQvKeimxJu+uGQ/yYvv9w=="
-  evpn_overlay_peers:
-#    password: "q+VNViP5i4rVjW1cxFv2wA=="
-  mlag_ipv4_underlay_peer:
-#    password: "vnEaG8gMeQf3d3cN6PktXQ=="
 
 bgp_graceful_restart:
   enabled: true
@@ -39,13 +10,11 @@ bgp_distance:
   internal_routes: 200
   local_routes: 200
 
-# Spine Switches
 spine:
   defaults:
     platform: cEOS
     bgp_as: 65002
     loopback_ipv4_pool: 192.2.255.0/24
-#    loopback_ipv6_pool: 2002:db8:c01d:c01a::/64
   nodes:
     - name: s2-spine1
       id: 1
@@ -54,15 +23,10 @@ spine:
       id: 2
       mgmt_ip: 192.168.0.21/24
 
-# Leaf switch groups
-# A maximum of two nodes can form a leaf group
-# When two nodes are in a leaf group this will automatically form mlag pair
-
 l3leaf:
   defaults:
     platform: cEOS
     loopback_ipv4_pool: 192.2.255.0/24
-#    loopback_ipv6_pool: 2002:db8:c01d:c01a::/64
     loopback_ipv4_offset: 2
     vtep_loopback_ipv4_pool: 192.2.254.0/24
     uplink_interfaces: [Ethernet2, Ethernet3]
@@ -74,8 +38,6 @@ l3leaf:
     virtual_router_mac_address: 00:1c:73:00:dc:01
     spanning_tree_mode: mstp
     spanning_tree_priority: 16384
-    filter:
-      # only_vlans_in_use: true
   node_groups:
     - group: pod21
       bgp_as: 65201
@@ -99,16 +61,8 @@ l3leaf:
           id: 54
           mgmt_ip: 192.168.0.125/24
           uplink_switch_interfaces: [Ethernet5, Ethernet5]
-    - group: DC2_BORDER_LEAFS
+    - group: DC2_BORDER_LEAFS_GW
       bgp_as: 65203
-#      filter:
-#        tenants:
-#          - Tenant_A
-#        # tags:
-#        #   - none
-#        always_include_vrfs_in_tenants:
-#          - Tenant_A
-
       evpn_gateway:
         remote_peers:
           - hostname: s1-brdr1
@@ -133,31 +87,12 @@ l3leaf:
             - Ethernet8
 
 
-
-
-
-#### Override for vEOS Lab Caveats ####
-
-# Disable update wait-for-convergence and update wait-for-install,
-# which is not supported in vEOS-LAB.
-# Refer to design guide
-
-# Update p2p mtu 9000 -> 1500
 p2p_uplinks_mtu: 1500
 
-# Adjust default bfd values
 bfd_multihop:
   interval: 1200
   min_rx: 1200
   multiplier: 3
-
-# List of additional CVP configlets to bind to devices and containers
-# Configlets MUST be configured on CVP before running AVD playbooks.
-
-# cv_configlets:
-#   containers:
-#     DC1_L3LEAFS:
-#       - ASE_GLOBAL-ALIASES
 
 
 name_servers:
@@ -167,7 +102,7 @@ name_servers:
 
 ntp:
   servers:
-  - name: time.google.com
+  - name: 10.70.32.146
     preferred: true
     vrf: default
     iburst: true

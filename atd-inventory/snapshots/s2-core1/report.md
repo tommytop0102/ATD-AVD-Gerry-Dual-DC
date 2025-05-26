@@ -14,7 +14,7 @@ Interface                      Status         Protocol           Description
 Et1                            up             up                 
 Et2                            up             up                 P2P_LINK_TO_s2-brdr1_Ethernet4
 Et3                            down           down               
-Et4                            up             up                 
+Et4                            up             up                 TO DC1 s1-core1 eth4
 Et6                            up             up                 
 Lo0                            up             up                 EVPN_Overlay_Peering
 Ma0                            up             up
@@ -33,9 +33,9 @@ Management0     192.168.0.202/24     up         up              1500
 ## show lldp neighbors
 
 ```
-Last table change time   : 1:12:30 ago
-Number of table inserts  : 6
-Number of table deletes  : 2
+Last table change time   : 6:21:24 ago
+Number of table inserts  : 5
+Number of table deletes  : 1
 Number of table drops    : 0
 Number of table age-outs : 0
 
@@ -105,6 +105,7 @@ interface Ethernet2
 interface Ethernet3
 !
 interface Ethernet4
+   description TO DC1 s1-core1 eth4
    no switchport
    ip address 30.1.1.2/24
 !
@@ -178,7 +179,7 @@ Image optimization: None
 
 Kernel version: 5.14.0-503.21.1.el9_5.x86_64
 
-Uptime: 1 hour and 38 minutes
+Uptime: 6 hours and 25 minutes
 Total memory: 49062200 kB
-Free memory: 3222132 kB
+Free memory: 3963948 kB
 ```

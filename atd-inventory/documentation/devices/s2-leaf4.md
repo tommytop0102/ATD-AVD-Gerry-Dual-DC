@@ -112,15 +112,15 @@ ip name-server vrf default 192.168.2.1
 
 | Server | VRF | Preferred | Burst | iBurst | Version | Min Poll | Max Poll | Local-interface | Key |
 | ------ | --- | --------- | ----- | ------ | ------- | -------- | -------- | --------------- | --- |
+| 10.70.32.146 | default | True | - | True | - | - | - | - | - |
 | 10.70.32.147 | default | True | - | True | - | - | - | - | - |
-| time.google.com | default | True | - | True | - | - | - | - | - |
 
 #### NTP Device Configuration
 
 ```eos
 !
+ntp server 10.70.32.146 prefer iburst
 ntp server 10.70.32.147 prefer iburst
-ntp server time.google.com prefer iburst
 ```
 
 ### Management API HTTP
@@ -218,9 +218,9 @@ vlan internal order ascending range 1006 1199
 
 | VLAN ID | Name | Trunk Groups |
 | ------- | ---- | ------------ |
-| 110 | bluevrf_OP_Zone_1 | - |
-| 160 | bluevrf_VMOTION | - |
-| 360 | bluevrf_V360 | - |
+| 20 | ExternalNetwork | - |
+| 2300 | bluenet1 | - |
+| 2301 | bluenet2 | - |
 | 3009 | MLAG_iBGP_bluevrf | LEAF_PEER_L3 |
 | 4093 | LEAF_PEER_L3 | LEAF_PEER_L3 |
 | 4094 | MLAG_PEER | MLAG |
@@ -229,14 +229,14 @@ vlan internal order ascending range 1006 1199
 
 ```eos
 !
-vlan 110
-   name bluevrf_OP_Zone_1
+vlan 20
+   name ExternalNetwork
 !
-vlan 160
-   name bluevrf_VMOTION
+vlan 2300
+   name bluenet1
 !
-vlan 360
-   name bluevrf_V360
+vlan 2301
+   name bluenet2
 !
 vlan 3009
    name MLAG_iBGP_bluevrf
@@ -372,7 +372,8 @@ interface Loopback100
 
 | Interface | Description | VRF |  MTU | Shutdown |
 | --------- | ----------- | --- | ---- | -------- |
-| Vlan110 | bluevrf_OP_Zone_1 | bluevrf | - | False |
+| Vlan2300 | bluenet1 | bluevrf | - | False |
+| Vlan2301 | bluenet2 | bluevrf | - | False |
 | Vlan3009 | MLAG_PEER_L3_iBGP: vrf bluevrf | bluevrf | 1500 | False |
 | Vlan4093 | MLAG_PEER_L3_PEERING | default | 1500 | False |
 | Vlan4094 | MLAG_PEER | default | 1500 | False |
@@ -381,7 +382,8 @@ interface Loopback100
 
 | Interface | VRF | IP Address | IP Address Virtual | IP Router Virtual Address | VRRP | ACL In | ACL Out |
 | --------- | --- | ---------- | ------------------ | ------------------------- | ---- | ------ | ------- |
-| Vlan110 |  bluevrf  |  -  |  10.1.10.1/24  |  -  |  -  |  -  |  -  |
+| Vlan2300 |  bluevrf  |  -  |  192.168.11.1/24  |  -  |  -  |  -  |  -  |
+| Vlan2301 |  bluevrf  |  -  |  192.168.12.1/24  |  -  |  -  |  -  |  -  |
 | Vlan3009 |  bluevrf  |  10.222.251.105/31  |  -  |  -  |  -  |  -  |  -  |
 | Vlan4093 |  default  |  10.222.251.105/31  |  -  |  -  |  -  |  -  |  -  |
 | Vlan4094 |  default  |  10.222.252.105/31  |  -  |  -  |  -  |  -  |  -  |
@@ -390,11 +392,17 @@ interface Loopback100
 
 ```eos
 !
-interface Vlan110
-   description bluevrf_OP_Zone_1
+interface Vlan2300
+   description bluenet1
    no shutdown
    vrf bluevrf
-   ip address virtual 10.1.10.1/24
+   ip address virtual 192.168.11.1/24
+!
+interface Vlan2301
+   description bluenet2
+   no shutdown
+   vrf bluevrf
+   ip address virtual 192.168.12.1/24
 !
 interface Vlan3009
    description MLAG_PEER_L3_iBGP: vrf bluevrf
@@ -431,9 +439,9 @@ interface Vlan4094
 
 | VLAN | VNI | Flood List | Multicast Group |
 | ---- | --- | ---------- | --------------- |
-| 110 | 20110 | - | - |
-| 160 | 55160 | - | - |
-| 360 | 55360 | - | - |
+| 20 | 30020 | - | - |
+| 2300 | 32300 | - | - |
+| 2301 | 32301 | - | - |
 
 ##### VRF to VNI and Multicast Group Mappings
 
@@ -450,9 +458,9 @@ interface Vxlan1
    vxlan source-interface Loopback1
    vxlan virtual-router encapsulation mac-address mlag-system-id
    vxlan udp-port 4789
-   vxlan vlan 110 vni 20110
-   vxlan vlan 160 vni 55160
-   vxlan vlan 360 vni 55360
+   vxlan vlan 20 vni 30020
+   vxlan vlan 2300 vni 32300
+   vxlan vlan 2301 vni 32301
    vxlan vrf bluevrf vni 10
 ```
 
@@ -594,9 +602,9 @@ ASN Notation: asplain
 
 | VLAN | Route-Distinguisher | Both Route-Target | Import Route Target | Export Route-Target | Redistribute |
 | ---- | ------------------- | ----------------- | ------------------- | ------------------- | ------------ |
-| 110 | 192.2.255.56:20110 | 20110:20110 | - | - | learned |
-| 160 | 192.2.255.56:55160 | 55160:55160 | - | - | learned |
-| 360 | 192.2.255.56:55360 | 55360:55360 | - | - | learned |
+| 20 | 192.2.255.56:30020 | 30020:30020 | - | - | learned |
+| 2300 | 192.2.255.56:32300 | 32300:32300 | - | - | learned |
+| 2301 | 192.2.255.56:32301 | 32301:32301 | - | - | learned |
 
 #### Router BGP VRFs
 
@@ -647,19 +655,19 @@ router bgp 65202
    neighbor 192.2.255.2 description s2-spine2
    redistribute connected route-map RM-CONN-2-BGP
    !
-   vlan 110
-      rd 192.2.255.56:20110
-      route-target both 20110:20110
+   vlan 20
+      rd 192.2.255.56:30020
+      route-target both 30020:30020
       redistribute learned
    !
-   vlan 160
-      rd 192.2.255.56:55160
-      route-target both 55160:55160
+   vlan 2300
+      rd 192.2.255.56:32300
+      route-target both 32300:32300
       redistribute learned
    !
-   vlan 360
-      rd 192.2.255.56:55360
-      route-target both 55360:55360
+   vlan 2301
+      rd 192.2.255.56:32301
+      route-target both 32301:32301
       redistribute learned
    !
    address-family evpn

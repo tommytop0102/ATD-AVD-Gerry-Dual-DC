@@ -68,6 +68,7 @@ ethernet_interfaces:
   ip_address: 30.1.1.1/24
   shutdown: false
   type: routed
+  description: TO DC2 s2-core1 eth4
 - name: Ethernet2
   peer: s1-brdr1
   peer_interface: Ethernet4

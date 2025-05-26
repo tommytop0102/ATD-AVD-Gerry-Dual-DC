@@ -1,5 +1,4 @@
 ---
-
 fabric_name: ATD_MGMT
 
 underlay_routing_protocol: ebgp
@@ -8,88 +7,15 @@ overlay_routing_protocol: ebgp
 
 evpn_vlan_aware_bundles: false
 
-
-
-# Documentation
 eos_designs_documentation:
-  # Generate fabric-wide documentation.
-
   enable: true
-  
-
-  # Include connected endpoints in the fabric-wide documentation.
   connected_endpoints: true
-  # Generate Topology CSV with all interfaces towards other devices.
-  
-
   topology_csv: true
-  
-
-  # Generate P2P links CSV with all routed point-to-point links between devices.
-  
   p2p_links_csv: true
 
-# OOB Management network default gateway
 mgmt_gateway: 192.168.0.1
-# If ATD is running cEOS, management interface is Management0
-# If ATD is running vEOS, management interface is Management1
 mgmt_interface: Management0
 mgmt_interface_vrf: default
 
-
-
-
-#name_servers:
-#  - 192.168.2.1
-#  - 8.8.8.8
-
-#ntp:
-#  servers:
-#  - name: time.google.com
-#    preferred: true
-#    vrf: default
-#    iburst: true
-
 dns_domain: atd.lab
 
-
-
-
-
-
-l3_edge:
-  # Define a new IP pool that will be used to assign IP addresses to L3 Edge interfaces.
-  p2p_links_ip_pools:
-    - name: DCI_IP_pool
-      ipv4_pool: 172.16.30.0/24
-  # Define a new link profile which will match the IP pool, the used ASNs and include the defined interface into underlay routing
-  p2p_links_profiles:
-    - name: DCI1_profile
-      ip_pool: DCI_IP_pool
-      as: [65103, 65300]
-      include_in_underlay_protocol: true
-    - name: DCI2_profile
-      ip_pool: DCI_IP_pool
-      as: [65203, 65301]
-      include_in_underlay_protocol: true
-  # Define each P2P L3 link and link the nodes, the interfaces and the profile used.
-  p2p_links:
-    - id: 1
-      nodes: [s1-brdr1, s1-core1]
-      interfaces: [Ethernet4, Ethernet2]
-      profile: DCI1_profile
-
-    - id: 2
-      nodes: [s1-brdr2, s1-core2]
-      interfaces: [Ethernet5, Ethernet3]
-      profile: DCI1_profile
-
-    - id: 3
-      nodes: [s2-brdr1, s2-core1]
-      interfaces: [Ethernet4, Ethernet2]
-      profile: DCI2_profile
-
-    - id: 4
-      nodes: [s2-brdr2, s2-core2]
-      interfaces: [Ethernet5, Ethernet3]
-      profile: DCI2_profile

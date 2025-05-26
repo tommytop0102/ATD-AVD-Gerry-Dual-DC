@@ -8,7 +8,7 @@ all:
           cv_collection: v3
     ATD_MGMT:
       children:
-        WAN_ROUTER:
+        ISN_WAN_ROUTER:
           children:
             DC1_WAN_ROUTERS:
               hosts:
@@ -60,7 +60,7 @@ all:
                     s1-leaf4:
                       type: l3leaf
                       ansible_host: 192.168.0.15
-            ATD_DC1_BORDER_LEAFS:
+            ATD_DC1_BORDER_LEAFS_GW:
               vars:
                 evpn_overlay_bgp_rtc: true
               hosts:
@@ -101,7 +101,7 @@ all:
                     s2-leaf4:
                       type: l3leaf
                       ansible_host: 192.168.0.125    
-            ATD_DC2_BORDER_LEAFS:
+            ATD_DC2_BORDER_LEAFS_GW:
               vars:
                 evpn_overlay_bgp_rtc: true
               hosts:
@@ -112,13 +112,18 @@ all:
                   type: l3leaf
                   ansible_host: 192.168.0.201
 
+    ATD_MSD_1:
+      children:
+        ISN_WAN_ROUTER:
+        ATD_DC1_FABRIC:
+        ATD_DC2_FABRIC:
 
     ATD_TENANTS_NETWORKS:
       children:
         ATD_DC1_LEAFS:
         ATD_DC2_LEAFS:
-        ATD_DC1_BORDER_LEAFS:
-        ATD_DC2_BORDER_LEAFS:
+        ATD_DC1_BORDER_LEAFS_GW:
+        ATD_DC2_BORDER_LEAFS_GW:
     ATD_MLAG_PORT:
       children:
         ATD_DC1_LEAFS:

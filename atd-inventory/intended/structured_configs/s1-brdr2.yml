@@ -132,48 +132,48 @@ router_bgp:
     - ip_address: 10.255.251.28
       peer_group: MLAG-IPv4-UNDERLAY-PEER
   vlans:
-  - id: 110
+  - id: 2300
     tenant: Tenant_A
-    rd: 192.0.255.18:20110
+    rd: 192.0.255.18:32300
     route_targets:
       both:
-      - 20110:20110
+      - 32300:32300
       import_export_evpn_domains:
       - domain: remote
-        route_target: 20110:20110
+        route_target: 32300:32300
     redistribute_routes:
     - learned
     rd_evpn_domain:
       domain: remote
-      rd: 192.0.255.18:20110
-  - id: 360
+      rd: 192.0.255.18:32300
+  - id: 2301
     tenant: Tenant_A
-    rd: 192.0.255.18:55360
+    rd: 192.0.255.18:32301
     route_targets:
       both:
-      - 55360:55360
+      - 32301:32301
       import_export_evpn_domains:
       - domain: remote
-        route_target: 55360:55360
+        route_target: 32301:32301
     redistribute_routes:
     - learned
     rd_evpn_domain:
       domain: remote
-      rd: 192.0.255.18:55360
-  - id: 160
+      rd: 192.0.255.18:32301
+  - id: 20
     tenant: Tenant_A
-    rd: 192.0.255.18:55160
+    rd: 192.0.255.18:30020
     route_targets:
       both:
-      - 55160:55160
+      - 30020:30020
       import_export_evpn_domains:
       - domain: remote
-        route_target: 55160:55160
+        route_target: 30020:30020
     redistribute_routes:
     - learned
     rd_evpn_domain:
       domain: remote
-      rd: 192.0.255.18:55160
+      rd: 192.0.255.18:30020
 static_routes:
 - vrf: default
   destination_address_prefix: 0.0.0.0/0
@@ -227,19 +227,19 @@ vlans:
   name: MLAG_PEER
   trunk_groups:
   - MLAG
-- id: 110
-  name: bluevrf_OP_Zone_1
+- id: 2300
+  name: bluenet1
+  tenant: Tenant_A
+- id: 2301
+  name: bluenet2
   tenant: Tenant_A
 - id: 3009
   name: MLAG_iBGP_bluevrf
   trunk_groups:
   - LEAF_PEER_L3
   tenant: Tenant_A
-- id: 160
-  name: bluevrf_VMOTION
-  tenant: Tenant_A
-- id: 360
-  name: bluevrf_V360
+- id: 20
+  name: ExternalNetwork
   tenant: Tenant_A
 vlan_interfaces:
 - name: Vlan4093
@@ -253,13 +253,21 @@ vlan_interfaces:
   no_autostate: true
   mtu: 1500
   ip_address: 10.255.252.29/31
-- name: Vlan110
+- name: Vlan2300
   tenant: Tenant_A
   tags:
-  - opzone
-  description: bluevrf_OP_Zone_1
+  - bluenet1-tag
+  description: bluenet1
   shutdown: false
-  ip_address_virtual: 10.1.10.1/24
+  ip_address_virtual: 192.168.11.1/24
+  vrf: bluevrf
+- name: Vlan2301
+  tenant: Tenant_A
+  tags:
+  - bluenet2-tag
+  description: bluenet2
+  shutdown: false
+  ip_address_virtual: 192.168.12.1/24
   vrf: bluevrf
 - name: Vlan3009
   tenant: Tenant_A
@@ -327,7 +335,7 @@ ethernet_interfaces:
   mtu: 1500
   ip_address: 172.16.30.2/31
 mlag_configuration:
-  domain_id: DC1_BORDER_LEAFS
+  domain_id: DC1_BORDER_LEAFS_GW
   local_interface: Vlan4094
   peer_address: 10.255.252.28
   peer_link: Port-Channel1
@@ -384,12 +392,12 @@ vxlan_interface:
       source_interface: Loopback1
       virtual_router_encapsulation_mac_address: mlag-system-id
       vlans:
-      - id: 110
-        vni: 20110
-      - id: 160
-        vni: 55160
-      - id: 360
-        vni: 55360
+      - id: 2300
+        vni: 32300
+      - id: 2301
+        vni: 32301
+      - id: 20
+        vni: 30020
       vrfs:
       - name: bluevrf
         vni: 10

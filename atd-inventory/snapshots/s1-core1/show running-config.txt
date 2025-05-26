@@ -54,6 +54,7 @@ interface Ethernet2
 interface Ethernet3
 !
 interface Ethernet4
+   description TO DC2 s2-core1 eth4
    no switchport
    ip address 30.1.1.1/24
 !

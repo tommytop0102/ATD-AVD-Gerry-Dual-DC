@@ -26,21 +26,21 @@ Ma0                            up             up
 
 ```
 Address
-Interface       IP Address           Status     Protocol         MTU    Owner  
---------------- -------------------- ---------- ------------ ---------- -------
-Ethernet2       172.32.255.8/31      up         up              1500           
-Ethernet3       172.32.255.12/31     up         up              1500           
-Ethernet4       172.32.255.16/31     up         up              1500           
-Ethernet5       172.32.255.20/31     up         up              1500           
-Ethernet7       172.32.255.24/31     up         up              1500           
-Ethernet8       172.32.255.28/31     up         up              1500           
-Loopback0       192.2.255.1/32       up         up             65535           
-Management0     192.168.0.20/24      up         up              1500
+Interface       IP Address            Status     Protocol         MTU   Owner  
+--------------- --------------------- ---------- ------------ --------- -------
+Ethernet2       172.32.255.200/31     up         up              1500          
+Ethernet3       172.32.255.204/31     up         up              1500          
+Ethernet4       172.32.255.208/31     up         up              1500          
+Ethernet5       172.32.255.212/31     up         up              1500          
+Ethernet7       172.32.255.216/31     up         up              1500          
+Ethernet8       172.32.255.220/31     up         up              1500          
+Loopback0       192.2.255.1/32        up         up             65535          
+Management0     192.168.0.20/24       up         up              1500
 ```
 ## show lldp neighbors
 
 ```
-Last table change time   : 3:48:24 ago
+Last table change time   : 6:23:06 ago
 Number of table inserts  : 11
 Number of table deletes  : 3
 Number of table drops    : 0
@@ -114,25 +114,25 @@ interface Ethernet2
    description P2P_LINK_TO_S2-LEAF1_Ethernet2
    mtu 1500
    no switchport
-   ip address 172.32.255.8/31
+   ip address 172.32.255.200/31
 !
 interface Ethernet3
    description P2P_LINK_TO_S2-LEAF2_Ethernet2
    mtu 1500
    no switchport
-   ip address 172.32.255.12/31
+   ip address 172.32.255.204/31
 !
 interface Ethernet4
    description P2P_LINK_TO_S2-LEAF3_Ethernet2
    mtu 1500
    no switchport
-   ip address 172.32.255.16/31
+   ip address 172.32.255.208/31
 !
 interface Ethernet5
    description P2P_LINK_TO_S2-LEAF4_Ethernet2
    mtu 1500
    no switchport
-   ip address 172.32.255.20/31
+   ip address 172.32.255.212/31
 !
 interface Ethernet6
 !
@@ -140,13 +140,13 @@ interface Ethernet7
    description P2P_LINK_TO_S2-BRDR1_Ethernet2
    mtu 1500
    no switchport
-   ip address 172.32.255.24/31
+   ip address 172.32.255.216/31
 !
 interface Ethernet8
    description P2P_LINK_TO_S2-BRDR2_Ethernet2
    mtu 1500
    no switchport
-   ip address 172.32.255.28/31
+   ip address 172.32.255.220/31
 !
 interface Loopback0
    description EVPN_Overlay_Peering
@@ -163,9 +163,9 @@ ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
 !
 ip route 0.0.0.0/0 192.168.0.1
 !
+ntp server 10.70.32.146 prefer iburst
 ntp server 10.70.32.147 prefer iburst
 ntp server 192.168.0.1 iburst source Management0
-ntp server time.google.com prefer iburst
 !
 ip radius source-interface Management0
 !
@@ -192,42 +192,42 @@ router bgp 65002
    neighbor IPv4-UNDERLAY-PEERS peer group
    neighbor IPv4-UNDERLAY-PEERS send-community
    neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
-   neighbor 172.32.255.9 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.32.255.9 remote-as 65201
-   neighbor 172.32.255.9 description s2-leaf1_Ethernet2
-   neighbor 172.32.255.13 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.32.255.13 remote-as 65201
-   neighbor 172.32.255.13 description s2-leaf2_Ethernet2
-   neighbor 172.32.255.17 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.32.255.17 remote-as 65202
-   neighbor 172.32.255.17 description s2-leaf3_Ethernet2
-   neighbor 172.32.255.21 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.32.255.21 remote-as 65202
-   neighbor 172.32.255.21 description s2-leaf4_Ethernet2
-   neighbor 172.32.255.25 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.32.255.25 remote-as 65203
-   neighbor 172.32.255.25 description s2-brdr1_Ethernet2
-   neighbor 172.32.255.29 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.32.255.29 remote-as 65203
-   neighbor 172.32.255.29 description s2-brdr2_Ethernet2
-   neighbor 192.2.255.5 peer group EVPN-OVERLAY-PEERS
-   neighbor 192.2.255.5 remote-as 65201
-   neighbor 192.2.255.5 description s2-leaf1
-   neighbor 192.2.255.6 peer group EVPN-OVERLAY-PEERS
-   neighbor 192.2.255.6 remote-as 65201
-   neighbor 192.2.255.6 description s2-leaf2
-   neighbor 192.2.255.7 peer group EVPN-OVERLAY-PEERS
-   neighbor 192.2.255.7 remote-as 65202
-   neighbor 192.2.255.7 description s2-leaf3
-   neighbor 192.2.255.8 peer group EVPN-OVERLAY-PEERS
-   neighbor 192.2.255.8 remote-as 65202
-   neighbor 192.2.255.8 description s2-leaf4
-   neighbor 192.2.255.9 peer group EVPN-OVERLAY-PEERS
-   neighbor 192.2.255.9 remote-as 65203
-   neighbor 192.2.255.9 description s2-brdr1
-   neighbor 192.2.255.10 peer group EVPN-OVERLAY-PEERS
-   neighbor 192.2.255.10 remote-as 65203
-   neighbor 192.2.255.10 description s2-brdr2
+   neighbor 172.32.255.201 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.32.255.201 remote-as 65201
+   neighbor 172.32.255.201 description s2-leaf1_Ethernet2
+   neighbor 172.32.255.205 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.32.255.205 remote-as 65201
+   neighbor 172.32.255.205 description s2-leaf2_Ethernet2
+   neighbor 172.32.255.209 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.32.255.209 remote-as 65202
+   neighbor 172.32.255.209 description s2-leaf3_Ethernet2
+   neighbor 172.32.255.213 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.32.255.213 remote-as 65202
+   neighbor 172.32.255.213 description s2-leaf4_Ethernet2
+   neighbor 172.32.255.217 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.32.255.217 remote-as 65203
+   neighbor 172.32.255.217 description s2-brdr1_Ethernet2
+   neighbor 172.32.255.221 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.32.255.221 remote-as 65203
+   neighbor 172.32.255.221 description s2-brdr2_Ethernet2
+   neighbor 192.2.255.53 peer group EVPN-OVERLAY-PEERS
+   neighbor 192.2.255.53 remote-as 65201
+   neighbor 192.2.255.53 description s2-leaf1
+   neighbor 192.2.255.54 peer group EVPN-OVERLAY-PEERS
+   neighbor 192.2.255.54 remote-as 65201
+   neighbor 192.2.255.54 description s2-leaf2
+   neighbor 192.2.255.55 peer group EVPN-OVERLAY-PEERS
+   neighbor 192.2.255.55 remote-as 65202
+   neighbor 192.2.255.55 description s2-leaf3
+   neighbor 192.2.255.56 peer group EVPN-OVERLAY-PEERS
+   neighbor 192.2.255.56 remote-as 65202
+   neighbor 192.2.255.56 description s2-leaf4
+   neighbor 192.2.255.57 peer group EVPN-OVERLAY-PEERS
+   neighbor 192.2.255.57 remote-as 65203
+   neighbor 192.2.255.57 description s2-brdr1
+   neighbor 192.2.255.58 peer group EVPN-OVERLAY-PEERS
+   neighbor 192.2.255.58 remote-as 65203
+   neighbor 192.2.255.58 description s2-brdr2
    redistribute connected route-map RM-CONN-2-BGP
    !
    address-family evpn
@@ -265,7 +265,7 @@ Image optimization: None
 
 Kernel version: 5.14.0-503.21.1.el9_5.x86_64
 
-Uptime: 1 hour and 38 minutes
+Uptime: 1 hour and 5 minutes
 Total memory: 49062200 kB
-Free memory: 3746676 kB
+Free memory: 3947440 kB
 ```

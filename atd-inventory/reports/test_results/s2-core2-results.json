@@ -108,7 +108,7 @@
     ],
     "description": "Verifies the status of the provided interfaces.",
     "result": "success",
-    "custom_field": "Interface Ethernet4 = 'up'"
+    "custom_field": "Interface Ethernet4 - TO DC1 s1-core2 eth4 = 'up'"
   },
   {
     "name": "s2-core2",

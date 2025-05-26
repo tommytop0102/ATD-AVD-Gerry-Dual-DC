@@ -41,7 +41,7 @@ anta.tests.interfaces:
     - name: Ethernet4
       status: up
     result_overwrite:
-      custom_field: Interface Ethernet4 = 'up'
+      custom_field: Interface Ethernet4 - TO DC2 s2-core2 eth4 = 'up'
 - VerifyInterfacesStatus:
     interfaces:
     - name: Ethernet3

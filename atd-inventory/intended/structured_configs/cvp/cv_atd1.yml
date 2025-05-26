@@ -1,11 +1,11 @@
 ---
 cvp_devices:
   - fqdn: s1-brdr1
-    parentContainerName: ATD_DC1_BORDER_LEAFS
+    parentContainerName: ATD_DC1_BORDER_LEAFS_GW
     configlets:
       - AVD_s1-brdr1
   - fqdn: s1-brdr2
-    parentContainerName: ATD_DC1_BORDER_LEAFS
+    parentContainerName: ATD_DC1_BORDER_LEAFS_GW
     configlets:
       - AVD_s1-brdr2
   - fqdn: s1-core1
@@ -41,11 +41,11 @@ cvp_devices:
     configlets:
       - AVD_s1-spine2
   - fqdn: s2-brdr1
-    parentContainerName: ATD_DC2_BORDER_LEAFS
+    parentContainerName: ATD_DC2_BORDER_LEAFS_GW
     configlets:
       - AVD_s2-brdr1
   - fqdn: s2-brdr2
-    parentContainerName: ATD_DC2_BORDER_LEAFS
+    parentContainerName: ATD_DC2_BORDER_LEAFS_GW
     configlets:
       - AVD_s2-brdr2
   - fqdn: s2-core1
@@ -81,7 +81,7 @@ cvp_devices:
     configlets:
       - AVD_s2-spine2
 cvp_containers:
-  ATD_DC1_BORDER_LEAFS:
+  ATD_DC1_BORDER_LEAFS_GW:
     parentContainerName: ATD_DC1_FABRIC
   ATD_DC1_FABRIC:
     parentContainerName: ATD_MGMT
@@ -89,7 +89,7 @@ cvp_containers:
     parentContainerName: ATD_DC1_FABRIC
   ATD_DC1_SPINES:
     parentContainerName: ATD_DC1_FABRIC
-  ATD_DC2_BORDER_LEAFS:
+  ATD_DC2_BORDER_LEAFS_GW:
     parentContainerName: ATD_DC2_FABRIC
   ATD_DC2_FABRIC:
     parentContainerName: ATD_MGMT
@@ -100,9 +100,11 @@ cvp_containers:
   ATD_MGMT:
     parentContainerName: Tenant
   DC1_WAN_ROUTERS:
-    parentContainerName: WAN_ROUTER
+    parentContainerName: ISN_WAN_ROUTER
   DC2_WAN_ROUTERS:
-    parentContainerName: WAN_ROUTER
+    parentContainerName: ISN_WAN_ROUTER
+  ISN_WAN_ROUTER:
+    parentContainerName: ATD_MGMT
   pod1:
     parentContainerName: ATD_DC1_LEAFS
   pod2:
@@ -111,5 +113,3 @@ cvp_containers:
     parentContainerName: ATD_DC2_LEAFS
   pod22:
     parentContainerName: ATD_DC2_LEAFS
-  WAN_ROUTER:
-    parentContainerName: ATD_MGMT

@@ -43,58 +43,58 @@ anta.tests.connectivity:
       custom_field: 'Local: Ethernet8 - Remote: s2-brdr2 Ethernet2'
 - VerifyReachability:
     hosts:
-    - destination: 172.32.255.9
+    - destination: 172.32.255.201
       repeat: 1
-      source: 172.32.255.8
+      source: 172.32.255.200
       vrf: default
     result_overwrite:
-      custom_field: 'Source: P2P Interface Ethernet2 (IP: 172.32.255.8) - Destination:
-        s2-leaf1 Ethernet2 (IP: 172.32.255.9)'
+      custom_field: 'Source: P2P Interface Ethernet2 (IP: 172.32.255.200) - Destination:
+        s2-leaf1 Ethernet2 (IP: 172.32.255.201)'
 - VerifyReachability:
     hosts:
-    - destination: 172.32.255.13
+    - destination: 172.32.255.205
       repeat: 1
-      source: 172.32.255.12
+      source: 172.32.255.204
       vrf: default
     result_overwrite:
-      custom_field: 'Source: P2P Interface Ethernet3 (IP: 172.32.255.12) - Destination:
-        s2-leaf2 Ethernet2 (IP: 172.32.255.13)'
+      custom_field: 'Source: P2P Interface Ethernet3 (IP: 172.32.255.204) - Destination:
+        s2-leaf2 Ethernet2 (IP: 172.32.255.205)'
 - VerifyReachability:
     hosts:
-    - destination: 172.32.255.17
+    - destination: 172.32.255.209
       repeat: 1
-      source: 172.32.255.16
+      source: 172.32.255.208
       vrf: default
     result_overwrite:
-      custom_field: 'Source: P2P Interface Ethernet4 (IP: 172.32.255.16) - Destination:
-        s2-leaf3 Ethernet2 (IP: 172.32.255.17)'
+      custom_field: 'Source: P2P Interface Ethernet4 (IP: 172.32.255.208) - Destination:
+        s2-leaf3 Ethernet2 (IP: 172.32.255.209)'
 - VerifyReachability:
     hosts:
-    - destination: 172.32.255.21
+    - destination: 172.32.255.213
       repeat: 1
-      source: 172.32.255.20
+      source: 172.32.255.212
       vrf: default
     result_overwrite:
-      custom_field: 'Source: P2P Interface Ethernet5 (IP: 172.32.255.20) - Destination:
-        s2-leaf4 Ethernet2 (IP: 172.32.255.21)'
+      custom_field: 'Source: P2P Interface Ethernet5 (IP: 172.32.255.212) - Destination:
+        s2-leaf4 Ethernet2 (IP: 172.32.255.213)'
 - VerifyReachability:
     hosts:
-    - destination: 172.32.255.25
+    - destination: 172.32.255.217
       repeat: 1
-      source: 172.32.255.24
+      source: 172.32.255.216
       vrf: default
     result_overwrite:
-      custom_field: 'Source: P2P Interface Ethernet7 (IP: 172.32.255.24) - Destination:
-        s2-brdr1 Ethernet2 (IP: 172.32.255.25)'
+      custom_field: 'Source: P2P Interface Ethernet7 (IP: 172.32.255.216) - Destination:
+        s2-brdr1 Ethernet2 (IP: 172.32.255.217)'
 - VerifyReachability:
     hosts:
-    - destination: 172.32.255.29
+    - destination: 172.32.255.221
       repeat: 1
-      source: 172.32.255.28
+      source: 172.32.255.220
       vrf: default
     result_overwrite:
-      custom_field: 'Source: P2P Interface Ethernet8 (IP: 172.32.255.28) - Destination:
-        s2-brdr2 Ethernet2 (IP: 172.32.255.29)'
+      custom_field: 'Source: P2P Interface Ethernet8 (IP: 172.32.255.220) - Destination:
+        s2-brdr2 Ethernet2 (IP: 172.32.255.221)'
 anta.tests.hardware:
 - VerifyEnvironmentPower:
     result_overwrite:
@@ -163,92 +163,92 @@ anta.tests.routing.bgp:
     address_families:
     - afi: evpn
       peers:
-      - 192.2.255.9
+      - 192.2.255.57
     result_overwrite:
-      custom_field: 'BGP EVPN Peer: s2-brdr1 (IP: 192.2.255.9)'
+      custom_field: 'BGP EVPN Peer: s2-brdr1 (IP: 192.2.255.57)'
 - VerifyBGPSpecificPeers:
     address_families:
     - afi: evpn
       peers:
-      - 192.2.255.10
+      - 192.2.255.58
     result_overwrite:
-      custom_field: 'BGP EVPN Peer: s2-brdr2 (IP: 192.2.255.10)'
+      custom_field: 'BGP EVPN Peer: s2-brdr2 (IP: 192.2.255.58)'
 - VerifyBGPSpecificPeers:
     address_families:
     - afi: evpn
       peers:
-      - 192.2.255.5
+      - 192.2.255.53
     result_overwrite:
-      custom_field: 'BGP EVPN Peer: s2-leaf1 (IP: 192.2.255.5)'
+      custom_field: 'BGP EVPN Peer: s2-leaf1 (IP: 192.2.255.53)'
 - VerifyBGPSpecificPeers:
     address_families:
     - afi: evpn
       peers:
-      - 192.2.255.6
+      - 192.2.255.54
     result_overwrite:
-      custom_field: 'BGP EVPN Peer: s2-leaf2 (IP: 192.2.255.6)'
+      custom_field: 'BGP EVPN Peer: s2-leaf2 (IP: 192.2.255.54)'
 - VerifyBGPSpecificPeers:
     address_families:
     - afi: evpn
       peers:
-      - 192.2.255.7
+      - 192.2.255.55
     result_overwrite:
-      custom_field: 'BGP EVPN Peer: s2-leaf3 (IP: 192.2.255.7)'
+      custom_field: 'BGP EVPN Peer: s2-leaf3 (IP: 192.2.255.55)'
 - VerifyBGPSpecificPeers:
     address_families:
     - afi: evpn
       peers:
-      - 192.2.255.8
+      - 192.2.255.56
     result_overwrite:
-      custom_field: 'BGP EVPN Peer: s2-leaf4 (IP: 192.2.255.8)'
+      custom_field: 'BGP EVPN Peer: s2-leaf4 (IP: 192.2.255.56)'
 - VerifyBGPSpecificPeers:
     address_families:
     - afi: ipv4
       peers:
-      - 172.32.255.9
+      - 172.32.255.201
       safi: unicast
     result_overwrite:
-      custom_field: 'BGP IPv4 Unicast Peer: s2-leaf1 (IP: 172.32.255.9)'
+      custom_field: 'BGP IPv4 Unicast Peer: s2-leaf1 (IP: 172.32.255.201)'
 - VerifyBGPSpecificPeers:
     address_families:
     - afi: ipv4
       peers:
-      - 172.32.255.13
+      - 172.32.255.205
       safi: unicast
     result_overwrite:
-      custom_field: 'BGP IPv4 Unicast Peer: s2-leaf2 (IP: 172.32.255.13)'
+      custom_field: 'BGP IPv4 Unicast Peer: s2-leaf2 (IP: 172.32.255.205)'
 - VerifyBGPSpecificPeers:
     address_families:
     - afi: ipv4
       peers:
-      - 172.32.255.17
+      - 172.32.255.209
       safi: unicast
     result_overwrite:
-      custom_field: 'BGP IPv4 Unicast Peer: s2-leaf3 (IP: 172.32.255.17)'
+      custom_field: 'BGP IPv4 Unicast Peer: s2-leaf3 (IP: 172.32.255.209)'
 - VerifyBGPSpecificPeers:
     address_families:
     - afi: ipv4
       peers:
-      - 172.32.255.21
+      - 172.32.255.213
       safi: unicast
     result_overwrite:
-      custom_field: 'BGP IPv4 Unicast Peer: s2-leaf4 (IP: 172.32.255.21)'
+      custom_field: 'BGP IPv4 Unicast Peer: s2-leaf4 (IP: 172.32.255.213)'
 - VerifyBGPSpecificPeers:
     address_families:
     - afi: ipv4
       peers:
-      - 172.32.255.25
+      - 172.32.255.217
       safi: unicast
     result_overwrite:
-      custom_field: 'BGP IPv4 Unicast Peer: s2-brdr1 (IP: 172.32.255.25)'
+      custom_field: 'BGP IPv4 Unicast Peer: s2-brdr1 (IP: 172.32.255.217)'
 - VerifyBGPSpecificPeers:
     address_families:
     - afi: ipv4
       peers:
-      - 172.32.255.29
+      - 172.32.255.221
       safi: unicast
     result_overwrite:
-      custom_field: 'BGP IPv4 Unicast Peer: s2-brdr2 (IP: 172.32.255.29)'
+      custom_field: 'BGP IPv4 Unicast Peer: s2-brdr2 (IP: 172.32.255.221)'
 anta.tests.routing.generic:
 - VerifyRoutingProtocolModel:
     model: multi-agent

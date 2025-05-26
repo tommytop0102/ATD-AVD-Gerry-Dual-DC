@@ -97,15 +97,15 @@ ip name-server vrf default 192.168.2.1
 
 | Server | VRF | Preferred | Burst | iBurst | Version | Min Poll | Max Poll | Local-interface | Key |
 | ------ | --- | --------- | ----- | ------ | ------- | -------- | -------- | --------------- | --- |
+| 10.70.32.146 | default | True | - | True | - | - | - | - | - |
 | 10.70.32.147 | default | True | - | True | - | - | - | - | - |
-| time.google.com | default | True | - | True | - | - | - | - | - |
 
 #### NTP Device Configuration
 
 ```eos
 !
+ntp server 10.70.32.146 prefer iburst
 ntp server 10.70.32.147 prefer iburst
-ntp server time.google.com prefer iburst
 ```
 
 ### Management API HTTP
