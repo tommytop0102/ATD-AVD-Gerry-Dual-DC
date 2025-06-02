@@ -161,6 +161,7 @@ management_api_http:
   enable_vrfs:
   - name: default
   enable_https: true
+eos_cli: "router bgp 65101\n  vrf bluevrf\n    neighbor 1.2.3.1 remote-as 65501\nip route vrf bluevrf 1.2.3.0/24 null0\n"
 vlans:
 - id: 4093
   tenant: system

@@ -46,6 +46,7 @@
 - [Virtual Source NAT](#virtual-source-nat)
   - [Virtual Source NAT Summary](#virtual-source-nat-summary)
   - [Virtual Source NAT Configuration](#virtual-source-nat-configuration)
+- [EOS CLI Device Configuration](#eos-cli-device-configuration)
 
 ## Management
 
@@ -807,4 +808,15 @@ vrf instance bluevrf
 ```eos
 !
 ip address virtual source-nat vrf bluevrf address 10.255.1.14
+```
+
+## EOS CLI Device Configuration
+
+```eos
+!
+router bgp 65101
+  vrf bluevrf
+    neighbor 1.2.3.1 remote-as 65501
+ip route vrf bluevrf 1.2.3.0/24 null0
+
 ```

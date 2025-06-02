@@ -12,6 +12,7 @@ network_ports:
     profile: int_trunk_host
 
 
+
 #  - switches:
 #      - s1-leaf1
 #    switch_ports: # Ex Ethernet1-48 or Ethernet2-3/1-48
