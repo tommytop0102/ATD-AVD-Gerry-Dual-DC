@@ -1,0 +1,41 @@
+---
+
+network_ports:
+  - switches:
+      - s1-leaf1
+    switch_ports: # Ex Ethernet1-48 or Ethernet2-3/1-48
+      - Ethernet4
+    enabled: true
+    description: test eth4 trunk port
+    mtu: 
+    vlans: "20,2300,2301"
+    profile: int_trunk_host
+
+
+
+#  - switches:
+#      - s1-leaf1
+#    switch_ports: # Ex Ethernet1-48 or Ethernet2-3/1-48
+#      - Ethernet1
+#    enabled: true
+#    description: teset etherent4
+#    mtu: 9000
+#    mode: trunk
+#    vlans: "2033"
+#    profile: int_trunk_host
+
+
+
+
+
+#  - switches:
+#      - s1-leaf[1]
+#    switch_ports:
+#      - Ethernet6
+#    enabled: true
+#    description:
+#    mode: access
+#    vlans: "2400"
+
+
+

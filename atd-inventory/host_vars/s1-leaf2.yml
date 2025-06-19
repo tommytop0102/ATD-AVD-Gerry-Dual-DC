@@ -1,0 +1,35 @@
+---
+
+
+
+network_ports:
+  - switches:
+      - s1-leaf2
+    switch_ports:
+      - Ethernet4
+    enabled: true
+    mtu: 9000
+    profile: int_routed_host
+    structured_config:
+      ip_address: 10.192.195.21/24
+      vrf: bluevrf
+      description: test eth4 routed port
+      mtu: 
+#      type: routed
+
+
+
+
+
+
+
+#network_ports:
+#  - switches:
+#      - s1-leaf2
+#    switch_ports: # Ex Ethernet1-48 or Ethernet2-3/1-48
+#      - Ethernet4
+#    enabled: false
+#    description: Leaf2_Access_eth4
+#    mode: access
+#    vlans: "2300"
+#    profile: int_access_host
