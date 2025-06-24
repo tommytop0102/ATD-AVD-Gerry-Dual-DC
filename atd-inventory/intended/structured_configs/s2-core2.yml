@@ -13,6 +13,10 @@ router_bgp:
   maximum_paths:
     paths: 4
     ecmp: 4
+  redistribute:
+    connected:
+      enabled: true
+      route_map: RM-CONN-2-BGP
   peer_groups:
   - name: IPv4-UNDERLAY-PEERS
     type: ipv4
@@ -22,9 +26,6 @@ router_bgp:
     peer_groups:
     - name: IPv4-UNDERLAY-PEERS
       activate: true
-  redistribute_routes:
-  - source_protocol: connected
-    route_map: RM-CONN-2-BGP
   neighbors:
   - ip_address: 172.16.30.6
     remote_as: '65203'
@@ -45,6 +46,12 @@ vlan_internal_order:
   range:
     beginning: 1006
     ending: 1199
+aaa_root:
+  disabled: true
+config_end: true
+enable_password:
+  disabled: true
+transceiver_qsfp_default_mode_4x10: true
 spanning_tree:
   mode: none
 vrfs:
@@ -52,7 +59,7 @@ vrfs:
   ip_routing: false
 management_interfaces:
 - name: Management0
-  description: oob_management
+  description: OOB_MANAGEMENT
   shutdown: false
   vrf: default
   ip_address: 192.168.0.203/24
@@ -67,20 +74,22 @@ ethernet_interfaces:
   peer_type: l3_interface
   ip_address: 30.2.2.2/24
   shutdown: false
-  type: routed
+  switchport:
+    enabled: false
   description: TO DC1 s1-core2 eth4
 - name: Ethernet3
   peer: s2-brdr2
   peer_interface: Ethernet5
   peer_type: l3leaf
-  description: P2P_LINK_TO_s2-brdr2_Ethernet5
-  type: routed
+  switchport:
+    enabled: false
   shutdown: false
   mtu: 9214
   ip_address: 172.16.30.7/31
+  description: P2P_s2-brdr2_Ethernet5
 loopback_interfaces:
 - name: Loopback0
-  description: EVPN_Overlay_Peering
+  description: ROUTER_ID
   shutdown: false
   ip_address: 192.168.250.4/32
 prefix_lists:

@@ -136,7 +136,7 @@ all:
 
   vars:
     ansible_user: arista
-    ansible_password: arista90vr
+    ansible_password: l5knazzlskvvjahb
 #    ansible_password: "{{ lookup('env', 'LABPASSPHRASE') }}"
     ansible_network_os: arista.eos.eos
     # Configure privilege escalation
