@@ -1,0 +1,1 @@
+anta nrfu -u arista -p n0mrr0s5kkllv0wn -i anta_inventory.yml -c anta_test.yml table

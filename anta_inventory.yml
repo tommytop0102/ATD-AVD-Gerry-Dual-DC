@@ -1,0 +1,10 @@
+anta_inventory:
+  hosts:
+  - host: 192.168.0.10 
+    name: s1-spine1  
+  - host: 192.168.0.11
+    name: s1-spine2
+  - host: 192.168.0.12
+    name: s1-leaf1
+  - host: 192.168.0.13
+    name: s1-leaf2

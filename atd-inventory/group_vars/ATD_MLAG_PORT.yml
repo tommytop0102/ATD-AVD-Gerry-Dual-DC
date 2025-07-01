@@ -1,0 +1,52 @@
+---
+servers:
+  - name: s1-leaf3_s1-leaf4-L2_vPC1
+#    rack: pod2
+    adapters:
+      - endpoint_ports: [NIC1, NIC2]
+        switch_ports:
+          - Ethernet4
+          - Ethernet4
+        switches:
+          - s1-leaf3
+          - s1-leaf4
+        profile: int_vpc_trunk_host
+        enabled: true
+        mtu:
+        vlans: "20,2300"
+        port_channel:
+          description: PortChannel
+          mode: active
+          channel_id: 4
+
+
+
+  - name: s2-host1
+#    rack: s2-rack2
+    adapters:
+      - endpoint_ports: [NIC1, NIC2]
+        switch_ports:
+          - Ethernet4
+          - Ethernet4
+        switches:
+          - s2-leaf1
+          - s2-leaf2
+        profile: int_vpc_trunk_host
+        enabled: true
+        mtu: 9000
+        vlans: "110-112,222,333"
+        port_channel:
+          description: PortChannel
+          mode: active
+
+
+#  - name: s1-host1
+#    rack: pod1
+#    adapters:
+#      - endpoint_ports: [Eth1, Eth2]
+#        switch_ports: [Ethernet4, Ethernet4]
+#        switches: [s1-leaf1, s1-leaf2]
+#        profile: TENANT_A
+#        port_channel:
+#          description: PortChannel
+#          mode: active

@@ -1,0 +1,68 @@
+---
+all:
+  children:
+    cv_servers:
+      hosts:
+        cv_atd1:
+          ansible_host: 192.168.0.5
+          cv_collection: v3
+    ATD_MGMT:
+      children:
+        ATD_DC1_FABRIC:
+          children:
+            ATD_DC1_SPINES:
+#              vars:
+#                type: spine
+              hosts:
+                s1-spine1:
+                  type: spine
+                  ansible_host: 192.168.0.10
+                s1-spine2:
+                  type: spine
+                  ansible_host: 192.168.0.11
+            ATD_DC1_LEAFS:
+#              vars:
+#                type: l3leaf
+              children:
+                pod1:
+                  hosts:
+                    s1-leaf1:
+                      type: l3leaf
+                      ansible_host: 192.168.0.12
+                    s1-leaf2:
+                      type: l3leaf
+                      ansible_host: 192.168.0.13
+                pod2:
+                  hosts:
+                    s1-leaf3:
+                      type: l3leaf
+                      ansible_host: 192.168.0.14
+                    s1-leaf4:
+                      type: l3leaf
+                      ansible_host: 192.168.0.15
+    ATD_TENANTS_NETWORKS:
+      children:
+        ATD_DC1_LEAFS:
+    ATD_MLAG_PORT:
+      children:
+        ATD_DC1_LEAFS:
+    ATD_PORT_PROFILES:
+       children:
+        ATD_DC1_LEAFS:
+
+
+
+  vars:
+    ansible_user: arista
+    ansible_password: arista90vr
+#    ansible_password: "{{ lookup('env', 'LABPASSPHRASE') }}"
+    ansible_network_os: arista.eos.eos
+    # Configure privilege escalation
+    ansible_become: true
+    ansible_become_method: enable
+    # HTTPAPI configuration
+    ansible_connection: httpapi
+    ansible_httpapi_port: 443
+    ansible_httpapi_use_ssl: true
+    ansible_httpapi_validate_certs: false
+    ansible_python_interpreter: $(which python3)

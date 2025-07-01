@@ -1,0 +1,12 @@
+---
+
+network_ports:
+  - switches:
+      - s2-leaf1
+    switch_ports: # Ex Ethernet1-48 or Ethernet2-3/1-48
+      - Ethernet4
+    enabled: true
+    description: test eth4 access port
+    mtu: 
+    vlans: "2300"
+    profile: int_access_host

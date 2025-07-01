@@ -1,0 +1,81 @@
+step 1 
+---------------------------------------------------------------
+git clone https://github.com/aristanetworks/ci-workshops-avd
+---------------------------------------------------------------
+
+step 2 
+------------------------------
+cd cd ci-workshops-avd
+------------------------------
+
+step 3
+------------------------------------------------------ 
+git config --global user.name "FirstName LastName"
+git config --global user.email "name@example.com"
+------------------------------------------------------
+
+step 4 install/update AVD( need to re-install at eveytime reboot )
+-------------------------------------------------------
+pip3 config set global.break-system-packages true
+pip3 config set global.disable-pip-version-check true
+pip3 install -r requirements.txt
+ansible-galaxy collection install -r requirements.yml
+pip3 install pre-commit
+pre-commit install
+--------------------------------------------------------
+
+step 5 Remove the environment variable set for ANTA if you see it there
+------------------------------------------------------------------------
+env | grep ANTA_VERSION
+unset ANTA_VERSION
+------------------------------------------------------------------------
+
+step 7 Set Environment Variables for ANTA CLI
+--------------------------------------------------------
+export ANTA_USERNAME=arista
+export ANTA_PASSWORD=$LABPASSPHRASE
+export ANTA_CATALOG=tests/all.yml
+---------------------------------------------------------
+
+step 8 modify anta_inevntory.yml
+---------------------------------------
+anta_inventory:
+  hosts:
+  - host: 192.168.0.10 
+    name: s1-spine1  
+  - host: 192.168.0.11
+    name: s1-spine2
+  - host: 192.168.0.12
+    name: s1-leaf1
+  - host: 192.168.0.13
+    name: s1-leaf2
+----------------------------------------
+
+step 9 modify anta_test.yml 
+-----------------------------------------------------------
+---
+anta.tests.connectivity:
+  - VerifyReachability:
+      hosts:
+        - source: Management0
+          destination: 1.1.1.1
+          vrf: default
+        - source: Management0
+          destination: 8.8.8.8
+          vrf: deault
+      result_overwrite:
+        categories:
+          - "Overwritten category 1"
+        description: "Test with overwritten description"
+        custom_field: "Test tommy"
+--------------------------------------------------------------
+
+step 10 execute command
+------------------------------------------------------------------------------------- 
+anta nrfu -u arista -p n0mrr0s5kkllv0wn -i anta_inventory.yml -c anta_test.yml table
+-------------------------------------------------------------------------------------
+
+step 11 pre-commit test
+-------------------------------
+pre-commit run -a
+------------------------------
